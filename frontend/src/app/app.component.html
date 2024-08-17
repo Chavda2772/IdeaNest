@@ -1,12 +1,29 @@
-<main class="main">
+<main class="flex justify-center items-center flex-col">
   <p>UserName:</p>
-  <input type="text" #idUserName [value]="valUserName" />
+  <input
+    class="bg-red-500 rounded-sm p-2"
+    type="text"
+    #idUserName
+    [value]="valUserName"
+  />
   <br />
   <br />
-  <button (click)="getRequest(idUserName.value)">Get</button>
-  <button (click)="PostDetails(idUserName.value)">Post</button>
+  <button
+    class="bg-purple-400 p-2 pl-3 pr-3 rounded font-bold active:scale-75"
+    (click)="getRequest(idUserName.value)"
+  >
+    Get
+  </button>
+  <button
+    class="bg-purple-400 p-2 pl-3 pr-3 rounded font-bold active:scale-75 mt-4"
+    (click)="PostDetails(idUserName.value)"
+  >
+    Post
+  </button>
 
-  <h4>{{ resValue || 'Loading ...' }}</h4>
+  <h4 class="text-xl font-bold">
+    {{ resValue || 'Loading ...' }}
+  </h4>
 </main>
 
 <router-outlet />
