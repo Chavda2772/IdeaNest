@@ -1,8 +1,6 @@
 import {
   HttpClient,
-  HttpHeaders,
   HttpParams,
-  HttpRequest,
 } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
