@@ -1,0 +1,23 @@
+<div class="w-[300px] m-2 mb-3">
+  <div
+    class="relative flex max-w-[24rem] flex-col overflow-hidden rounded-xl bg-gray-300 bg-clip-border text-gray-700 shadow-md p-4"
+  >
+    <div
+      class="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border"
+    >
+      <div class="">
+        <h5
+          class="block font-sans font-semibold leading-snug tracking-normal text-blue-gray-900"
+        >
+          {{ title }}
+        </h5>
+      </div>
+      <img [src]="imageUrl" [alt]="description" />
+    </div>
+    <p
+      class="block mt-3 font-sans text-xl antialiased font-normal leading-relaxed text-gray-700"
+    >
+      {{ description }}
+    </p>
+  </div>
+</div>
