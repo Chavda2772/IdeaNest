@@ -1,15 +1,18 @@
 <div class="h-[100dvh]">
   <h1>Dashboard</h1>
-  <div class="flex flex-wrap items-start justify-start">
-    <app-nest-item></app-nest-item>
-    <app-nest-item></app-nest-item>
-    <app-nest-item></app-nest-item>
-    <app-nest-item></app-nest-item>
-    <app-nest-item></app-nest-item>
-    <app-nest-item></app-nest-item>
-    <app-nest-item></app-nest-item>
-    <app-nest-item></app-nest-item>
-    <app-nest-item></app-nest-item>
-    <app-nest-item></app-nest-item>
+  <div class="flex flex-col flex-wrap items-center justify-start">
+    <label>URL: </label>
+    <input
+      type="text"
+      [(ngModel)]="previewURL"
+      class="m-3 p-3 bg-red-400 w-2/3"
+    />
+    <h2 class="font-bold">{{ previewURL }}</h2>
+    <button (click)="onGenerateUrl()" class="p-2 bg-purple-400 rounded">
+      Generate URL
+    </button>
+    <div class="flex flex-wrap items-center justify-center bg-gray-100">
+      <app-nest-item></app-nest-item>
+    </div>
   </div>
 </div>

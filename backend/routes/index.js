@@ -1,4 +1,5 @@
 var express = require('express');
+var linkPreview = require('link-preview-js');
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
@@ -18,6 +19,20 @@ router.post('/', function (req, res, next) {
     success: true,
     msg: 'POST - ' + name,
   });
+});
+
+router.post('/generate', async function (req, res, next) {
+  try {
+    var { url } = req.body;
+    var responseData = await linkPreview.getLinkPreview(url);
+
+    res.json({
+      success: true,
+      ...responseData,
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
