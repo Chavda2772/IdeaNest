@@ -3,11 +3,12 @@ import { CommonFunctionsService } from '../../core/utility/common-functions.serv
 import { NestOperationService } from '../../core/services/nest-operation.service';
 import { NestItemComponent } from './components/nest-item/nest-item.component';
 import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [FormsModule, NestItemComponent],
+  imports: [FormsModule, NestItemComponent, NgIf],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -20,14 +21,12 @@ export class DashboardComponent {
   title = 'idea-nest';
   previewURL = 'https://www.google.com/';
   valUserName: string = '';
-  resValue: string = '';
+  generatedData: any = {};
 
   async getRequest(val: string) {
     const data = await this.nestOperationService.getProducts('/', {
       name: val,
     });
-
-    this.resValue = JSON.stringify(data);
   }
 
   async onGenerateUrl() {
@@ -35,6 +34,6 @@ export class DashboardComponent {
       url: this.previewURL,
     });
 
-    this.resValue = JSON.stringify(data);
+    this.generatedData = data;
   }
 }

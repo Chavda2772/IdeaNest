@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-nest-item',
@@ -8,10 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './nest-item.component.css',
 })
 export class NestItemComponent {
-  title = 'UI/UX Review Check';
-  url = 'https://www.google.com/';
-  imageUrl =
-    'https://www.google.com/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png';
-  description =
-    'Google is a search engine that allows users to find information on the internet. It is one of the most popular websites in the world.';
+  @Input() title = 'UI/UX Review Check';
+  @Input() url = 'https://www.google.com/';
+  @Input() imageUrl = '';
+  @Input() description = '';
 }

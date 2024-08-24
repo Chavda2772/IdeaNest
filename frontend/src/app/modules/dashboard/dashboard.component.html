@@ -12,7 +12,26 @@
       Generate URL
     </button>
     <div class="flex flex-wrap items-center justify-center bg-gray-100">
-      <app-nest-item></app-nest-item>
+      <app-nest-item
+        *ngIf="!!generatedData"
+        [title]="generatedData?.title"
+        [url]="generatedData?.url"
+        [imageUrl]="generatedData?.images[0] ?? ''"
+      ></app-nest-item>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/V2oZy_gu-Rc"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <iframe
+        width="560"
+        height="315"
+        src="https://youtube.com/shorts/5PnihvvBQUuoLyRt"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
 </div>
