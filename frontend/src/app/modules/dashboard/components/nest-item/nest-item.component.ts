@@ -11,5 +11,6 @@ export class NestItemComponent {
   @Input() title = 'UI/UX Review Check';
   @Input() url = 'https://www.google.com/';
   @Input() imageUrl = '';
-  @Input() description = '';
+  @Input() description =
+    'crablike campus sulfide legislate alarm enigmatic emerald exciting policy silenced enable vocalize';
 }
