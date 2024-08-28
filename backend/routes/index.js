@@ -1,34 +1,32 @@
-var express = require('express');
-var linkPreview = require('link-preview-js');
-var router = express.Router();
+const createError = require('http-errors');
+const router = require('express').Router();
+const {
+  generateUrlPreivewDetails,
+  getUrlDetailsByLinkPreview,
+} = require('../controller/itemOperation');
 
-router.get('/', function (req, res, next) {
-  var { name } = req.query;
-
-  res.json({
-    success: true,
-    msg: 'GET - ' + name,
-  });
-});
-
-/* Post home page. */
-router.post('/', function (req, res, next) {
-  var { name } = req.body;
-
-  res.json({
-    success: true,
-    msg: 'POST - ' + name,
-  });
-});
-
+// Fetching Collection
 router.post('/generate', async function (req, res, next) {
   try {
-    var { url } = req.body;
-    var responseData = await linkPreview.getLinkPreview(url);
-
-    res.json({
+    let { url } = req.body;
+    let response = await generateUrlPreivewDetails(url);
+    res.send({
       success: true,
-      ...responseData,
+      result: response ?? {},
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Fetching Collection
+router.post('/generateLite', async function (req, res, next) {
+  try {
+    let { url } = req.body;
+    let response = await getUrlDetailsByLinkPreview(url);
+    res.send({
+      success: true,
+      result: response ?? {},
     });
   } catch (error) {
     next(error);
