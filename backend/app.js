@@ -16,6 +16,7 @@ const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
 const collectionRoute = require('./routes/collectionOperation.js');
 const itemOperationRoute = require('./routes/itemOperation.js');
+const { error } = require('console');
 
 // Application configuration
 logger.info('Configure Application settings.');
@@ -41,6 +42,7 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
+  logger.error(err.message, err);
   res.status(err.status || 500);
   res.json({
     success: false,
