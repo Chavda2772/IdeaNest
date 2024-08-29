@@ -4,7 +4,11 @@ const createError = require('http-errors');
 
 // Imports
 const router = express.Router();
-const { AddUser, GetUserDetails } = require('../controller/user');
+const {
+  AddUser,
+  GetUserDetails,
+  IsUserNameExists,
+} = require('../controller/user');
 const { generateToken, authenticate } = require('../service/auth');
 
 // Login User
@@ -20,6 +24,14 @@ router.post('/register', async function (req, res, next) {
     theme,
     profileUrl,
   } = req.body;
+
+  // Validate
+  if (!userName || !firstName || !lastName || !email || !password)
+    return next(createError('Invalid details.'));
+
+  // UserName already Exists
+  let isUserExists = await IsUserNameExists(userName);
+  if (isUserExists) return next(createError('UserName already exists'));
 
   try {
     await AddUser({

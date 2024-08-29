@@ -10,7 +10,7 @@ addUpdateNestItem = async (data) => {
     pool.getConnection(function (err, conn) {
       if (!err) {
         conn.query(
-          `call usp_NestItem_IU(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          `call usp_nestItem_IU(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             data.id,
             data.title,

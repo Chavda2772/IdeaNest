@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2024 at 04:44 AM
+-- Generation Time: Aug 29, 2024 at 04:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -81,7 +81,13 @@ CREATE PROCEDURE `usp_getUserDetailsByEmail` (IN `_email` VARCHAR(101))   BEGIN
 	WHERE Email = _email;
 END$$
 
-CREATE PROCEDURE `usp_NestItem_IU` (IN `_id` INT, IN `_title` VARCHAR(150), IN `_description` VARCHAR(150), IN `_url` NVARCHAR(1000), IN `_isPreview` BIT, IN `_urlTitle` VARCHAR(500), IN `_urlImage` VARCHAR(500), IN `_urlDescription` TEXT, IN `_urlDomain` VARCHAR(200), IN `_parentCollectionId` INT, IN `_createdBy` INT)   BEGIN
+CREATE PROCEDURE `usp_getUserNameCount` (IN `_userName` NVARCHAR(60))   BEGIN
+	SELECT Count(1) as UserNameCount 
+    FROM UserInfo 
+    WHERE UserName = _userName;
+END$$
+
+CREATE PROCEDURE `usp_nestItem_IU` (IN `_id` INT, IN `_title` VARCHAR(150), IN `_description` VARCHAR(150), IN `_url` NVARCHAR(1000), IN `_isPreview` BIT, IN `_urlTitle` VARCHAR(500), IN `_urlImage` VARCHAR(500), IN `_urlDescription` TEXT, IN `_urlDomain` VARCHAR(200), IN `_parentCollectionId` INT, IN `_createdBy` INT)   BEGIN
 -- Update
 if(_id > 0) THEN
 	UPDATE NestItems 
@@ -102,7 +108,7 @@ ELSE
 	END IF;
 END$$
 
-CREATE PROCEDURE `usp_UserDetails_UI` (IN `_userId` INT, IN `_userName` VARCHAR(60), IN `_firstName` VARCHAR(45), IN `_middleName` VARCHAR(45), IN `_lastName` VARCHAR(45), IN `_email` VARCHAR(101), IN `_password` VARCHAR(120), IN `_contactNo` VARCHAR(12), IN `_theme` VARCHAR(15), IN `_profileUrl` VARCHAR(500))   BEGIN
+CREATE PROCEDURE `usp_userDetails_UI` (IN `_userId` INT, IN `_userName` VARCHAR(60), IN `_firstName` VARCHAR(45), IN `_middleName` VARCHAR(45), IN `_lastName` VARCHAR(45), IN `_email` VARCHAR(101), IN `_password` VARCHAR(120), IN `_contactNo` VARCHAR(12), IN `_theme` VARCHAR(15), IN `_profileUrl` VARCHAR(500))   BEGIN
 
 
 IF (_userId > 0) THEN
@@ -117,7 +123,7 @@ IF (_userId > 0) THEN
 		WHERE userId = _userId;
     ELSE
         INSERT INTO UserInfo (`UserName`, `FirstName`, `MiddleName`, `LastName`, `Email`, `Password`, `ContactNo`, `Theme`, `ProfileUrl`, `IsVerified`, `IsActive`)
-		VALUES (_userName, _firstName, _middleName, _lastName, _email, _password, _contactNo, _theme, _profileUrl, 0, 1);
+		VALUES (_userName, _firstName, _middleName, _lastName, _email, _password, _contactNo, _theme, _profileUrl, 1, 1);
 	END IF;
 END$$
 

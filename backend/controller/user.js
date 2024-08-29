@@ -19,7 +19,7 @@ module.exports.AddUser = async (data) => {
     pool.getConnection(function (err, conn) {
       if (!err) {
         conn.query(
-          `call usp_UserDetails_UI(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          `call usp_userDetails_UI(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             null,
             userName,
@@ -67,7 +67,7 @@ module.exports.UpdateUser = async (data) => {
     pool.getConnection(function (err, conn) {
       if (!err) {
         conn.query(
-          `call usp_UserDetails_UI(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          `call usp_userDetails_UI(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             userId,
             userName,
@@ -110,6 +110,30 @@ module.exports.GetUserDetails = async (email) => {
               reject(error);
             }
             resolve(results[0][0]);
+          }
+        );
+      } else {
+        logger.error(err);
+        reject(err);
+      }
+    });
+  });
+};
+
+// Check UserName already Exits
+module.exports.IsUserNameExists = async (username) => {
+  return new Promise(function (resolve, reject) {
+    pool.getConnection(function (err, conn) {
+      if (!err) {
+        conn.query(
+          `call usp_getUserNameCount(?)`,
+          [username],
+          function (error, results, fields) {
+            conn.release();
+            if (error) {
+              reject(error);
+            }
+            resolve(results[0][0]?.UserNameCount > 0);
           }
         );
       } else {

@@ -33,7 +33,7 @@ module.exports.CollectionDetailsInsertUpdate = async (data) => {
     pool.getConnection(function (err, conn) {
       if (!err) {
         conn.query(
-          `call usp_CollectionDetail_IU(?, ?, ?, ?)`,
+          `call usp_collectionDetail_IU(?, ?, ?, ?)`,
           [collectionId, collectionName, collectionParentId, createdBy],
           function (error, results, fields) {
             conn.release();
