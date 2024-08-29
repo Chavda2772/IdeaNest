@@ -16,7 +16,6 @@ const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
 const collectionRoute = require('./routes/collectionOperation.js');
 const itemOperationRoute = require('./routes/itemOperation.js');
-const { error } = require('console');
 
 // Application configuration
 logger.info('Configure Application settings.');
