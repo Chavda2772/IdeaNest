@@ -11,7 +11,7 @@ const {
 } = require('../controller/user');
 const { generateToken, authenticate } = require('../service/auth');
 
-// Login User
+// Register User
 router.post('/register', async function (req, res, next) {
   let {
     userName,
@@ -27,11 +27,12 @@ router.post('/register', async function (req, res, next) {
 
   // Validate
   if (!userName || !firstName || !lastName || !email || !password)
-    return next(createError('Invalid details.'));
+    return res.send({ success: false, msg: 'Invalid details' });
 
   // UserName already Exists
   let isUserExists = await IsUserNameExists(userName);
-  if (isUserExists) return next(createError('UserName already exists'));
+  if (isUserExists)
+    return res.send({ success: false, msg: 'UserName already exists' });
 
   try {
     await AddUser({
@@ -95,7 +96,7 @@ router.post('/login', async function (req, res, next) {
   }
 });
 
-// Login User
+// Fetch User Details
 router.post('/getDetails', authenticate, async function (req, res, next) {
   try {
     let { Email } = req.data;

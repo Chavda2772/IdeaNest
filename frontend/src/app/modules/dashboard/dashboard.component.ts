@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonFunctionsService } from '../../core/utility/common-functions.service';
 import { NestOperationService } from '../../core/services/nest-operation.service';
 import { NestItemComponent } from './components/nest-item/nest-item.component';
@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { FooterNavigationComponent } from './components/footer-navigation/footer-navigation.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,11 +21,17 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent {
-  constructor(private nestOperationService: NestOperationService) {}
+export class DashboardComponent implements OnInit {
+  constructor(private nestOperationService: NestOperationService) { }
 
   // inject
   _commonFunctions = inject(CommonFunctionsService);
+  _userService = inject(UserService);
+
+  // Life cycle events
+  ngOnInit(): void {
+    // Fetch user Details
+  }
 
   title = 'idea-nest';
   previewURL = 'https://www.google.com/';
@@ -55,5 +62,10 @@ export class DashboardComponent {
     });
 
     this.generatedData = data;
+  }
+
+  // Logout
+  onLogout() {
+    this._userService.Logout();
   }
 }

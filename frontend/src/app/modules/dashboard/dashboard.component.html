@@ -9,53 +9,23 @@
 <div class="min-h-dvh bg-white dark:bg-gray-300">
   <app-navbar />
   <div class="flex flex-wrap justify-center mt-6">
-    <app-nest-item
-      *ngIf="!!generatedData"
-      [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"
-    ></app-nest-item>
-    <app-nest-item
-      *ngIf="!!generatedData"
-      [title]="generatedData?.title"
-      [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"
-    ></app-nest-item>
-    <app-nest-item
-      *ngIf="!!generatedData"
-      [title]="generatedData?.title"
-      [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"
-    ></app-nest-item>
-    <app-nest-item
-      *ngIf="!!generatedData"
-      [title]="generatedData?.title"
-      [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"
-    ></app-nest-item>
-    <app-nest-item
-      *ngIf="!!generatedData"
-      [title]="generatedData?.title"
-      [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"
-    ></app-nest-item>
-    <app-nest-item
-      *ngIf="!!generatedData"
-      [title]="generatedData?.title"
-      [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"
-    ></app-nest-item>
-    <app-nest-item
-      *ngIf="!!generatedData"
-      [title]="generatedData?.title"
-      [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"
-    ></app-nest-item>
-    <app-nest-item
-      *ngIf="!!generatedData"
-      [title]="generatedData?.title"
-      [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"
-    ></app-nest-item>
+    <button (click)="onLogout()" class="bg-blue-500">Logout</button>
+    <app-nest-item *ngIf="!!generatedData" [url]="generatedData?.url" [imageUrl]="generatedData?.images[0] ?? ''">
+    </app-nest-item>
+    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
+      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
+    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
+      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
+    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
+      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
+    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
+      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
+    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
+      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
+    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
+      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
+    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
+      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
   </div>
   <app-footer-navigation />
 </div>

@@ -2,17 +2,23 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LoginComponent } from './modules/login/login.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { RegisterComponent } from './modules/register/register.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
-    title: 'Login',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: 'login',
     component: LoginComponent,
     title: 'Login',
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    title: 'Register',
   },
   {
     path: 'dashboard',

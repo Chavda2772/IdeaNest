@@ -4,6 +4,7 @@
 Frontend/.vscode
 Frontend/.angular
 Frontend/node_modules
+frontend/.vs
 
 # BACKEND
 Backend/.env
