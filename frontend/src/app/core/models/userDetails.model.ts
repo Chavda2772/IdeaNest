@@ -1,12 +1,12 @@
 export interface UserDetails {
-  userId?: number;
-  userName: string;
-  firstName: string;
-  middleName?: string;
-  lastName: string;
-  email: string;
-  password?: string;
-  contactNo?: string;
-  theme?: string;
-  profileUrl?: string;
+  UserId?: number;
+  UserName: string;
+  FirstName: string;
+  MiddleName?: string;
+  LastName: string;
+  Email: string;
+  Password?: string;
+  ContactNo?: string;
+  Theme?: string;
+  ProfileUrl?: string;
 }

@@ -14,37 +14,37 @@ const { generateToken, authenticate } = require('../service/auth');
 // Register User
 router.post('/register', async function (req, res, next) {
   let {
-    userName,
-    firstName,
-    middleName,
-    lastName,
-    email,
-    password,
-    contactNo,
-    theme,
-    profileUrl,
+    UserName,
+    FirstName,
+    MiddleName,
+    LastName,
+    Email,
+    Password,
+    ContactNo,
+    Theme,
+    ProfileUrl,
   } = req.body;
 
   // Validate
-  if (!userName || !firstName || !lastName || !email || !password)
+  if (!UserName || !FirstName || !LastName || !Email || !Password)
     return res.send({ success: false, msg: 'Invalid details' });
 
   // UserName already Exists
-  let isUserExists = await IsUserNameExists(userName);
+  let isUserExists = await IsUserNameExists(UserName);
   if (isUserExists)
     return res.send({ success: false, msg: 'UserName already exists' });
 
   try {
     await AddUser({
-      userName,
-      firstName,
-      middleName,
-      lastName,
-      email,
-      password,
-      contactNo,
-      theme,
-      profileUrl,
+      UserName,
+      FirstName,
+      MiddleName,
+      LastName,
+      Email,
+      Password,
+      ContactNo,
+      Theme,
+      ProfileUrl,
     });
 
     res.send({
@@ -59,14 +59,14 @@ router.post('/register', async function (req, res, next) {
 // Login User
 router.post('/login', async function (req, res, next) {
   try {
-    let { email, password } = req.body;
-    let userData = await GetUserDetails(email);
+    let { Email, Password } = req.body;
+    let userData = await GetUserDetails(Email);
 
     // User found validation
     if (!userData) return res.send({ success: false, msg: 'User not found' });
 
     // Password verification
-    if (password != userData.Password)
+    if (Password != userData.Password)
       return res.send({ success: false, msg: 'Invalid Credentials' });
 
     // Generate JWT Tokken

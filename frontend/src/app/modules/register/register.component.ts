@@ -59,15 +59,15 @@ export class RegisterComponent {
     // Prepare details
     let formValues = this._registerForm.value;
     let UserDetails: UserDetails = {
-      firstName: formValues.firstName,
-      middleName: formValues.middleName,
-      lastName: formValues.lastName,
-      userName: formValues.userName,
-      email: formValues.email,
-      password: formValues.password,
-      contactNo: formValues.contactNo,
-      theme: formValues.theme,
-      profileUrl: formValues.profileUrl
+      FirstName: formValues.firstName,
+      MiddleName: formValues.middleName,
+      LastName: formValues.lastName,
+      UserName: formValues.userName,
+      Email: formValues.email,
+      Password: formValues.password,
+      ContactNo: formValues.contactNo,
+      Theme: formValues.theme,
+      ProfileUrl: formValues.profileUrl
     };
 
     // Proxy to save data

@@ -3,47 +3,27 @@ const { logger } = require('../config/logger.js');
 
 // Add Update User Details
 module.exports.AddUser = async (data) => {
-  let {
-    userName,
-    firstName,
-    middleName,
-    lastName,
-    email,
-    password,
-    contactNo,
-    theme,
-    profileUrl,
-  } = data;
+  let { UserName, FirstName, MiddleName, LastName, Email, Password, ContactNo, Theme, ProfileUrl } = data;
 
   return new Promise(function (resolve, reject) {
     pool.getConnection(function (err, conn) {
-      if (!err) {
-        conn.query(
-          `call usp_userDetails_UI(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [
-            null,
-            userName,
-            firstName,
-            middleName,
-            lastName,
-            email,
-            password,
-            contactNo,
-            theme,
-            profileUrl,
-          ],
-          function (error, results, fields) {
-            conn.release();
-            if (error) {
-              reject(error);
-            }
-            resolve(results[0]);
-          }
-        );
-      } else {
+      if (err) {
         logger.error(err);
         reject(err);
+        return;
       }
+
+      conn.query(
+        `call usp_userDetails_UI(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [null, UserName, FirstName, MiddleName, LastName, Email, Password, ContactNo, Theme, ProfileUrl],
+        function (error, results, fields) {
+          conn.release();
+          if (error) {
+            reject(error);
+          }
+          resolve(results[0]);
+        }
+      );
     });
   });
 };

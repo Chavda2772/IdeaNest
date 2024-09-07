@@ -10,17 +10,17 @@ export class ProxyBaseService {
   http = inject(HttpClient);
 
   // Get Request
-  async getRequest(url: string, body?: object) {
-    return await this.baseRequest('GET', url, body);
+  async getRequest<T>(url: string, body?: object) {
+    return await this.baseRequest<T>('GET', url, body);
   }
 
   // Post request
-  async request(method: string, url: string, body?: object) {
-    return await this.baseRequest(method, url, body);
+  async request<T>(method: string, url: string, body?: object) {
+    return await this.baseRequest<T>(method, url, body);
   }
 
   // Request base method call
-  private async baseRequest(
+  private async baseRequest<T>(
     method: string,
     url: string,
     body?: any,
@@ -50,9 +50,8 @@ export class ProxyBaseService {
       config.params = new HttpParams().appendAll(body);
     else config.body = body;
 
-    let result = this.http.request(method, apiUrl, config);
     return new Promise((resolve, reject) => {
-      result.subscribe({
+      return this.http.request<T>(method, apiUrl, config).subscribe({
         next: resolve,
         error: reject,
       });
