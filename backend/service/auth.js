@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const secret = 'Mahesh';
-const tokenExpireMinutes = 60;
+const tokenExpireMinutes = 120;
 
 async function generateToken(user) {
   return jwt.sign({ data: user }, secret, {

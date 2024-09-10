@@ -30,11 +30,11 @@ router.get('/:id', async function (req, res, next) {
 // Adding collection
 router.post('/', async function (req, res, next) {
   try {
-    let { title, description, url, parentCollectionId } = req.body;
+    let { Title, Description, Url, ParentCollectionId } = req.body;
     let { UserId } = req.data;
 
     // Data Validation
-    if (!title || !description) next(createError('Invalid details'));
+    if (!Title || !Description) next(createError('Invalid details'));
 
     // Default details
     let isPreview = false,
@@ -44,11 +44,11 @@ router.post('/', async function (req, res, next) {
       urlDomain = null;
 
     // Parent collection ID null
-    parentCollectionId = parentCollectionId ?? null;
+    ParentCollectionId = ParentCollectionId ?? null;
 
     // Fetch URL Details
-    if (url) {
-      let urlDetail = await generateUrlPreivewDetails(url);
+    if (Url) {
+      let urlDetail = await generateUrlPreivewDetails(Url);
       if (urlDetail) {
         isPreview = true;
         urlTitle = urlDetail.title;
@@ -60,15 +60,15 @@ router.post('/', async function (req, res, next) {
 
     await addUpdateNestItem({
       id: null,
-      title: title,
-      description: description,
-      url,
+      title: Title,
+      description: Description,
+      url: Url,
       isPreview,
       urlTitle,
       urlImage,
       urlDescription,
       urlDomain,
-      parentCollectionId,
+      parentCollectionId: ParentCollectionId,
       createdBy: UserId,
     });
     res.send({

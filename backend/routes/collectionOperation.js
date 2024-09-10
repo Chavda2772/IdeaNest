@@ -7,7 +7,7 @@ const {
 } = require('../controller/collectionOperation');
 
 // Fetching Collection
-router.get('/:id', async function (req, res, next) {
+router.get('/:id?', async function (req, res, next) {
   try {
     let { id: collectionId } = req.params;
     let { UserId } = req.data;

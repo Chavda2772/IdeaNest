@@ -8,6 +8,10 @@ export const ApiEndpoints = {
     Register: '/api/user/register',
     GetDetails: '/api/user/getDetails',
   },
-  Collection: {},
-  NestItems: {},
+  Collection: {
+    Get: '/api/collection'
+  },
+  NestItems: {
+    Add: '/api/items',
+  },
 };

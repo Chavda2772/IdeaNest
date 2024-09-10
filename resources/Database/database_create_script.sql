@@ -51,7 +51,8 @@ CREATE PROCEDURE `usp_deleteNestItem` (IN `_id` INT, IN `_createdBy` INT)   BEGI
   WHERE id = _id And CreatedBy = _createdBy;
 END$$
 
-CREATE PROCEDURE `usp_getCollectionDetails` (IN `_collectionId` INT, IN `_userId` INT)   BEGIN
+CREATE PROCEDURE `usp_getCollectionAndItemsDetails`(IN `_collectionId` INT, IN `_userId` INT)
+BEGIN
     -- Fetching collection details
     SELECT CollectionId, CollectionName 
     FROM CollectionDetails 
@@ -59,7 +60,7 @@ CREATE PROCEDURE `usp_getCollectionDetails` (IN `_collectionId` INT, IN `_userId
           (CollectionParentId = _collectionId OR (_collectionId IS NULL AND CollectionParentId IS NULL));
     
     -- Fetching Items details
-    SELECT id, Title, Description, CAST(IsPreview AS UNSIGNED) as IsPreview, UrlTitle, UrlImage, UrlDescription, UrlDomain 
+    SELECT id, Title, Description, CAST(IsPreview AS UNSIGNED) as IsPreview, Url, UrlTitle, UrlImage, UrlDescription, UrlDomain 
     FROM NestItems 
     WHERE CreatedBy = _userId AND 
           (ParentCollectionId = _collectionId OR (_collectionId IS NULL AND ParentCollectionId IS NULL));

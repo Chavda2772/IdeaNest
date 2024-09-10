@@ -8,7 +8,7 @@ module.exports.getCollectionDetails = async (data) => {
     pool.getConnection(function (err, conn) {
       if (!err) {
         conn.query(
-          `call usp_getCollectionDetails(?, ?)`,
+          `call usp_getCollectionAndItemsDetails(?, ?)`,
           [collectionId, userId],
           function (error, results, fields) {
             conn.release();

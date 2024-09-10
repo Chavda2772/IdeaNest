@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { RegisterComponent } from './modules/register/register.component';
 import { authGuard } from './core/guard/auth.guard';
 import { guestGuard } from './core/guard/guest.guard';
+import { AddUpdateComponent } from './modules/add-update/add-update.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,18 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [authGuard],
     title: 'Dashboard',
+  },
+  {
+    path: 'add',
+    component: AddUpdateComponent,
+    canActivate: [authGuard],
+    title: 'Add Item',
+  },
+  {
+    path: 'update/:id',
+    component: AddUpdateComponent,
+    canActivate: [authGuard],
+    title: 'Update Item',
   },
   {
     path: '**',

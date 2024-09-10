@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ApiEndpoints } from '../constants/ApiUrls';
+import { LocalStorageConst } from '../constants/LocalStorageConst';
 
 @Injectable({
   providedIn: 'root',
@@ -35,19 +36,23 @@ export class ProxyBaseService {
       body: undefined,
       headers: {
         contentType: 'application/json; charset=utf-8',
+        Authorization: `Bearer ${localStorage.getItem(LocalStorageConst.TokenKey)}`
       },
     };
 
     // Modify url
     if (!url.startsWith('http')) {
-      if (!url.endsWith('/') && !apiUrl.startsWith('/')) apiUrl = apiUrl + '/';
+      if (!ApiEndpoints.BaseApi.endsWith('/') && !apiUrl.startsWith('/'))
+        apiUrl = '/' + apiUrl;
 
       apiUrl = ApiEndpoints.BaseApi + apiUrl;
     }
 
     // Adding parameters
-    if (method.toLowerCase() == 'get')
-      config.params = new HttpParams().appendAll(body);
+    if (method.toLowerCase() == 'get') {
+      if (body)
+        config.params = new HttpParams().appendAll(body);
+    }
     else config.body = body;
 
     return new Promise((resolve, reject) => {

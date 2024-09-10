@@ -8,9 +8,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './nest-item.component.css',
 })
 export class NestItemComponent {
-  @Input() title = 'UI/UX Review Check';
-  @Input() url = 'https://www.google.com/';
-  @Input() imageUrl = '';
-  @Input() description =
-    'crablike campus sulfide legislate alarm enigmatic emerald exciting policy silenced enable vocalize';
+  @Input() title = '';
+  @Input() url = '';
+  @Input() urlImage = '';
+  @Input() urlDescription = '';
+  @Input() urlDomain = '';
+  @Input() description = '';
 }

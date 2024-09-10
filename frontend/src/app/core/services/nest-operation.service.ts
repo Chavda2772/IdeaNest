@@ -3,18 +3,16 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { ApiEndpoints } from '../constants/ApiUrls';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NestOperationService {
-  constructor() {}
+  constructor() { }
 
   // Injecting
   http = inject(HttpClient);
-
-  // Config Variables
-  baseUrl: string = 'http://localhost:3000';
 
   // Request base
   private async request(
@@ -39,7 +37,7 @@ export class NestOperationService {
     if (!url.startsWith('http')) {
       if (!url.endsWith('/')) apiUrl = apiUrl + '/';
 
-      apiUrl = this.baseUrl + apiUrl;
+      apiUrl = ApiEndpoints.BaseApi + apiUrl;
     }
 
     // Adding parameters

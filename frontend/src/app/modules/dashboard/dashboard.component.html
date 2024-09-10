@@ -9,23 +9,14 @@
 <div class="min-h-dvh bg-white dark:bg-gray-300">
   <app-navbar />
   <div class="flex flex-wrap justify-center mt-6">
-    <button (click)="onLogout()" class="bg-blue-500">Logout</button>
-    <app-nest-item *ngIf="!!generatedData" [url]="generatedData?.url" [imageUrl]="generatedData?.images[0] ?? ''">
+    <!-- Collection List PENDING -->
+
+    <!-- Generate Items List -->
+    @for (item of CollectionList?.Items; track item.id) {
+    <app-nest-item [title]="item.Title" [url]="item.Url" [urlImage]="item.UrlImage"
+      [urlDescription]="item.UrlDescription" [urlDomain]="item.UrlDomain" [description]="item.Description">
     </app-nest-item>
-    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
-    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
-    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
-    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
-    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
-    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
-    <app-nest-item *ngIf="!!generatedData" [title]="generatedData?.title" [url]="generatedData?.url"
-      [imageUrl]="generatedData?.images[0] ?? ''"></app-nest-item>
+    }
   </div>
   <app-footer-navigation />
 </div>

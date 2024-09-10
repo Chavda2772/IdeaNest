@@ -7,6 +7,9 @@ import { NgIf } from '@angular/common';
 import { FooterNavigationComponent } from './components/footer-navigation/footer-navigation.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserService } from '../../core/services/user.service';
+import { CollectionOperationService } from '../../core/services/collection-operation.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CollectionResponse } from '../../core/models/nestItem.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,16 +25,26 @@ import { UserService } from '../../core/services/user.service';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
-  constructor(private nestOperationService: NestOperationService) { }
+  constructor(private nestOperationService: NestOperationService, private route: ActivatedRoute) {
+
+  }
 
   // inject
-  _commonFunctions = inject(CommonFunctionsService);
-  _userService = inject(UserService);
+  commonFunctions = inject(CommonFunctionsService);
+  userService = inject(UserService);
+  collectionOperationService = inject(CollectionOperationService);
 
-  // Life cycle events
+  // Fetch user Details
   ngOnInit(): void {
-    // Fetch user Details
+    this.route.params.subscribe(async params => {
+      this.CollectionId = params['id'];
+      this.CollectionList = await this.collectionOperationService.getCollectionAndItems(this.CollectionId);
+      this.generatedData = this.CollectionList.Items[0];
+    });
   }
+
+  CollectionId: number | undefined;
+  CollectionList: CollectionResponse | undefined;
 
   title = 'idea-nest';
   previewURL = 'https://www.google.com/';
@@ -64,8 +77,5 @@ export class DashboardComponent implements OnInit {
     this.generatedData = data;
   }
 
-  // Logout
-  onLogout() {
-    this._userService.Logout();
-  }
+
 }
