@@ -7,9 +7,12 @@
 ></iframe> -->
 
 <div class="min-h-dvh bg-white dark:bg-gray-300">
-  <app-navbar />
+  <app-navbar Title="Home" />
   <div class="flex flex-wrap justify-center mt-6">
-    <!-- Collection List PENDING -->
+    <!-- Generate Collection List-->
+    @for (item of CollectionList?.Collection; track item.CollectionId) {
+    <app-nest-folder [CollectionId]="item.CollectionId" [CollectionName]="item.CollectionName"></app-nest-folder>
+    }
 
     <!-- Generate Items List -->
     @for (item of CollectionList?.Items; track item.id) {

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FooterNavigationComponent } from "../dashboard/components/footer-navigation/footer-navigation.component";
-import { NavbarComponent } from "../dashboard/components/navbar/navbar.component";
+import { FooterNavigationComponent } from "../../core/components/footer-navigation/footer-navigation.component";
+import { NavbarComponent } from "../../core/components/navbar/navbar.component";
 import { FormsModule } from '@angular/forms';
 import { ItemOperationService } from '../../core/services/item-operation.service';
 

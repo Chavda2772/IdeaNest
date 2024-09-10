@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { UserService } from '../../../../core/services/user.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,13 +14,25 @@ export class FooterNavigationComponent {
   userService = inject(UserService);
   router = inject(Router);
 
-  // Logout
-  onLogout() {
-    this.userService.Logout();
+  // Events
+  onHomeClick() {
+    this.router.navigate(['dashboard'])
   }
 
-  // Add Dialog
-  openDialog() {
+  onAddClick() {
     this.router.navigate(['add'])
+  }
+
+  onSettingsClick() {
+    console.warn('PENDING')
+  }
+
+  onProfileClick() {
+    console.warn('PENDING')
+  }
+
+  // Logout
+  onLogoutClick() {
+    this.userService.Logout();
   }
 }
