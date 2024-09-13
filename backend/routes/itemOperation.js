@@ -9,7 +9,7 @@ const {
   generateUrlPreivewDetails,
 } = require('../controller/itemOperation');
 
-// Fetching Collection
+// Fetching Nest Item
 router.get('/:id', async function (req, res, next) {
   try {
     let { id: itemId } = req.params;
@@ -27,7 +27,7 @@ router.get('/:id', async function (req, res, next) {
   }
 });
 
-// Adding collection
+// Adding Nest Item
 router.post('/', async function (req, res, next) {
   try {
     let { Title, Description, Url, ParentCollectionId } = req.body;
@@ -80,7 +80,7 @@ router.post('/', async function (req, res, next) {
   }
 });
 
-// Updating collection
+// Updating Nest Item
 router.put('/', async function (req, res, next) {
   try {
     let { id, title, description, url } = req.body;
@@ -138,7 +138,7 @@ router.put('/', async function (req, res, next) {
   }
 });
 
-// Delete Collection
+// Delete Nest Item
 router.delete('/:id', async function (req, res, next) {
   try {
     let { id } = req.params;

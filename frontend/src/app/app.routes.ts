@@ -32,7 +32,19 @@ export const routes: Routes = [
     title: 'Dashboard',
   },
   {
+    path: 'dashboard/:id',
+    component: DashboardComponent,
+    canActivate: [authGuard],
+    title: 'Dashboard',
+  },
+  {
     path: 'add',
+    component: AddUpdateComponent,
+    canActivate: [authGuard],
+    title: 'Add Item',
+  },
+  {
+    path: 'add/:id',
     component: AddUpdateComponent,
     canActivate: [authGuard],
     title: 'Add Item',

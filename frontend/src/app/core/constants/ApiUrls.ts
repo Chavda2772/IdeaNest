@@ -9,7 +9,8 @@ export const ApiEndpoints = {
     GetDetails: '/api/user/getDetails',
   },
   Collection: {
-    Get: '/api/collection'
+    Get: '/api/collection',
+    Add: '/api/collection'
   },
   NestItems: {
     Add: '/api/items',

@@ -11,6 +11,8 @@ import { CollectionOperationService } from '../../core/services/collection-opera
 import { ActivatedRoute } from '@angular/router';
 import { CollectionResponse } from '../../core/models/nestItem.model';
 import { NestFolderComponent } from "./nest-folder/nest-folder.component";
+import { MatDialog } from '@angular/material/dialog';
+import { AddSelectionWindowComponent } from './add-selection-window/add-selection-window.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,12 +24,12 @@ import { NestFolderComponent } from "./nest-folder/nest-folder.component";
     FooterNavigationComponent,
     NavbarComponent,
     NestFolderComponent
-],
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private dialogRef: MatDialog) { }
 
   // inject
   commonFunctions = inject(CommonFunctionsService);
@@ -43,7 +45,26 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(async params => {
       this.CollectionId = params['id'];
-      this.CollectionList = await this.collectionOperationService.getCollectionAndItems(this.CollectionId);
+      // If user is not authorized then logout
+      try {
+        this.CollectionList = await this.collectionOperationService.getCollectionAndItems(this.CollectionId);
+      } catch (error: any) {
+        if (error?.status == 401) {
+          this.userService.Logout()
+        }
+      }
+    });
+  }
+
+  // Events
+  onFooterAddClick() {
+    this.dialogRef.open(AddSelectionWindowComponent, {
+      width: '500px',
+      data: {
+        CollectionId: 0,
+        CollectionName: '',
+        CollectionParentId: this.CollectionId
+      },
     });
   }
 }

@@ -31,13 +31,19 @@ router.get('/:id?', async function (req, res, next) {
 // Adding collection
 router.post('/', async function (req, res, next) {
   try {
-    let { collectionName, collectionParentId } = req.body;
+    let { CollectionName, CollectionParentId } = req.body;
     let { UserId } = req.data;
+
+    if (!CollectionName)
+      return res.send({
+        success: false,
+        msg: "Invalid details"
+      })
 
     await CollectionDetailsInsertUpdate({
       collectionId: 0,
-      collectionName,
-      collectionParentId,
+      collectionName: CollectionName,
+      collectionParentId: CollectionParentId,
       createdBy: UserId,
     });
     res.send({

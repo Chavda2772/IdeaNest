@@ -16,13 +16,18 @@ export class AddUpdateComponent implements OnInit {
   // Inject classes
   itemOperationService = inject(ItemOperationService);
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {
+    this.route.params.subscribe(async params => {
+      this.ParentCollectionId = params['id'];
+    });
+  }
 
   // Variables
   ItemId: number | undefined;
   Title: string | undefined;
   Description: string | undefined;
-  Url: string | undefined;;
+  Url: string | undefined;
+  ParentCollectionId: number | null = null;
 
   async onFormSubmit() {
     // Validating Data
@@ -32,7 +37,8 @@ export class AddUpdateComponent implements OnInit {
     let res = await this.itemOperationService.addNestItem({
       Title: this.Title,
       Description: this.Description,
-      Url: this.Url
+      Url: this.Url,
+      ParentCollectionId: this.ParentCollectionId
     });
 
     if (!res.success)

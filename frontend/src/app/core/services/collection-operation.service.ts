@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { ApiEndpoints } from '../constants/ApiUrls';
 import { ProxyBaseService } from './proxy-base.service';
 import { CollectionResponse } from '../models/nestItem.model';
+import { Responsedata } from '../models/responsedata.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,15 @@ export class CollectionOperationService {
     let resData = await this.proxyBase.request<CollectionResponse>('get', api)
 
     return resData as CollectionResponse;
+  }
+
+  // Adding collection
+  async addCollection(CollectionName: String, CollectionParentId: Number | null) {
+    let resData = await this.proxyBase.request<Responsedata>('post', ApiEndpoints.Collection.Add, {
+      CollectionName: CollectionName,
+      CollectionParentId: CollectionParentId
+    })
+
+    return resData as Responsedata;
   }
 }

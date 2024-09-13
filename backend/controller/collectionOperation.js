@@ -40,7 +40,7 @@ module.exports.CollectionDetailsInsertUpdate = async (data) => {
             if (error) {
               reject(error);
             }
-            resolve(results[0]);
+            resolve(!!results.affectedRows);
           }
         );
       } else {

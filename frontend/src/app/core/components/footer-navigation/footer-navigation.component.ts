@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
@@ -14,13 +14,16 @@ export class FooterNavigationComponent {
   userService = inject(UserService);
   router = inject(Router);
 
+  // Variables
+  @Output() addClickEvent = new EventEmitter();
+
   // Events
   onHomeClick() {
     this.router.navigate(['dashboard'])
   }
 
   onAddClick() {
-    this.router.navigate(['add'])
+    this.addClickEvent.emit();
   }
 
   onSettingsClick() {
