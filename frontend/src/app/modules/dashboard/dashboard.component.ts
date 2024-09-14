@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit {
         this.CollectionList = await this.collectionOperationService.getCollectionAndItems(this.CollectionId);
       } catch (error: any) {
         if (error?.status == 401) {
+          this.commonFunctions.showSnackBar('Session Expired.')
           this.userService.Logout()
         }
       }

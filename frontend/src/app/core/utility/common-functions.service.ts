@@ -1,10 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ConfirmMessageComponent } from '../components/confirm-message/confirm-message.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommonFunctionsService {
-  constructor() {}
+  constructor() { }
+
+  // Injectable
+  readonly dialog = inject(MatDialog);
+  readonly snackBar = inject(MatSnackBar);
 
   // youtube test URL's
   testUrls = [
@@ -44,8 +51,8 @@ export class CommonFunctionsService {
     return videoDetail
       ? videoDetail[2].substring(0, 11)
       : new RegExp(/^[0-9A-Za-z_-]{11}$/).test(url)
-      ? url
-      : '';
+        ? url
+        : '';
   }
 
   // Return object having height and width property
@@ -67,4 +74,18 @@ export class CommonFunctionsService {
 
     return { width, height };
   }
+
+  // Show confirm message
+  showconfirmMessage(title: string, msg: string, cancelText?: string, okText?: string, config: MatDialogConfig | any = {}) {
+    config.data = { title: title, msg: msg, cancelText: cancelText, okText: okText };
+    return this.dialog.open(ConfirmMessageComponent, config);
+  }
+
+  // Show Sna
+  showSnackBar(message: string) {
+    return this.snackBar.open(message, '', {
+      duration: 3000
+    });
+  }
+
 }
