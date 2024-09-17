@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
       this.CollectionId = params['id'];
       // If user is not authorized then logout
       try {
-        this.CollectionList = await this.collectionOperationService.getCollectionAndItems(this.CollectionId);
+        await this.refreshCollectionAndItems();
       } catch (error: any) {
         if (error?.status == 401) {
           this.commonFunctions.showSnackBar('Session Expired.')
@@ -56,6 +56,12 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+  // Fetch details
+  async refreshCollectionAndItems() {
+    this.CollectionList = await this.collectionOperationService.getCollectionAndItems(this.CollectionId);
+  }
+
 
   // Events
   onFooterAddClick() {
@@ -66,6 +72,8 @@ export class DashboardComponent implements OnInit {
         CollectionName: '',
         CollectionParentId: this.CollectionId
       },
+    }).afterClosed().subscribe(() => {
+      // TODO: Refresh on adding item or Collection
     });
   }
 }

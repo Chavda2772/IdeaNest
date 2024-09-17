@@ -6,7 +6,18 @@ Frontend/.angular
 Frontend/node_modules
 frontend/.vs
 
+# FRONTEND
+frontend_restructure/.vscode
+frontend_restructure/.angular
+frontend_restructure/node_modules
+frontend_restructure/.vs
+frontend_restructure/dist
+
 # BACKEND
 Backend/.env
 Backend/node_modules
 Backend/Logs
+
+
+#Extra
+frontend_redesign/

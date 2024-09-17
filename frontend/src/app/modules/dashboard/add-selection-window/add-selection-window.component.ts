@@ -36,7 +36,8 @@ export class AddSelectionWindowComponent {
     });
   }
   onNestItemClick() {
-    this.router.navigate(['add' + "/" + this.data.CollectionParentId]);
+    let path = 'add' + (this.data.CollectionParentId ? `/${this.data.CollectionParentId}` : '');
+    this.router.navigate([path]);
     this.onClose()
   }
   onClose() {
