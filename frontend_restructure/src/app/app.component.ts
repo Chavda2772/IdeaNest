@@ -11,6 +11,4 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'IdeaNestUI';
-}
+export class AppComponent { }
