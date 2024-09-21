@@ -1,17 +1,11 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # FRONTEND
-Frontend/.vscode
-Frontend/.angular
-Frontend/node_modules
+frontend/.vscode
+frontend/.angular
+frontend/node_modules
 frontend/.vs
-
-# FRONTEND
-frontend_restructure/.vscode
-frontend_restructure/.angular
-frontend_restructure/node_modules
-frontend_restructure/.vs
-frontend_restructure/dist
+frontend/dist
 
 # BACKEND
 Backend/.env
