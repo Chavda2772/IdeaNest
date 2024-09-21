@@ -3,7 +3,7 @@ const createError = require('http-errors');
 
 // Imports
 const userService = require('../service/userService');
-const { generateToken } = require('../controller/authController');
+const { generateToken, generateHashPassword, comparePassword } = require('../controller/authController');
 
 // Register User
 module.exports.registerUser = async function (req, res, next) {
@@ -28,6 +28,9 @@ module.exports.registerUser = async function (req, res, next) {
   if (isUserExists)
     return res.send({ success: false, msg: 'UserName already exists' });
 
+  // encrypt Password
+  let encryptPass = await generateHashPassword(Password);
+
   try {
     await userService.AddUser({
       UserName,
@@ -35,7 +38,7 @@ module.exports.registerUser = async function (req, res, next) {
       MiddleName,
       LastName,
       Email,
-      Password,
+      Password: encryptPass,
       ContactNo,
       Theme,
       ProfileUrl,
@@ -43,7 +46,7 @@ module.exports.registerUser = async function (req, res, next) {
 
     res.send({
       success: true,
-      msg: 'User operation success.',
+      msg: 'User registered success.',
     });
   } catch (error) {
     next(createError('Error in user operation'));
@@ -57,11 +60,12 @@ module.exports.loginUser = async function (req, res, next) {
     let userData = await userService.GetUserDetails(Email);
 
     // User found validation
-    if (!userData) 
+    if (!userData)
       return res.send({ success: false, msg: 'User not found' });
 
     // Password verification
-    if (Password != userData.Password)
+    const isMatched = await comparePassword(Password, userData.Password);
+    if (!isMatched)
       return res.send({ success: false, msg: 'Invalid Credentials' });
 
     // Generate JWT Tokken
