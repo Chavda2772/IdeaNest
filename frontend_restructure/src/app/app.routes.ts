@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { LoginComponent } from './modules/login/login.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LoginComponent } from './pages/login/login.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
-import { RegisterComponent } from './modules/register/register.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { authGuard } from './core/guard/auth.guard';
 import { guestGuard } from './core/guard/guest.guard';
-import { AddUpdateComponent } from './modules/add-update/add-update.component';
+import { AddUpdateComponent } from './pages/add-update/add-update.component';
 
 export const routes: Routes = [
     {
