@@ -11,8 +11,9 @@
  
   <!-- NO Records -->
   @if (CollectionDetail?.Items?.length == 0 && CollectionDetail?.Collections?.length == 0) {
-    <div class="flex-1 flex justify-center items-center">
-      <h1>NO DATA FOUND !!!</h1>
+    <div class="flex-1 flex flex-col justify-center items-center">
+      <img class="w-96" src="images/addItems.svg">
+      <h3 class="font-extralight pt-3">No data found</h3>
     </div>
   }
   <!-- Only generate content if has details -->

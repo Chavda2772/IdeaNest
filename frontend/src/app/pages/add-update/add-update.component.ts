@@ -4,6 +4,7 @@ import { FooterNavigationComponent } from "../../core/components/footer-navigati
 import { NavbarComponent } from "../../core/components/navbar/navbar.component";
 import { FormsModule } from '@angular/forms';
 import { ItemOperationService } from '../../core/services/item-operation.service';
+import { CommonFunctionsService } from '../../core/utility/common-functions.service';
 
 @Component({
   selector: 'app-add-update',
@@ -14,6 +15,7 @@ import { ItemOperationService } from '../../core/services/item-operation.service
 export class AddUpdateComponent implements OnInit {
   // Inject classes
   itemOperationService = inject(ItemOperationService);
+  commonFunctionsService = inject(CommonFunctionsService);
 
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(async params => {
@@ -40,16 +42,21 @@ export class AddUpdateComponent implements OnInit {
       ParentCollectionId: this.ParentCollectionId
     });
 
-    if (!res.success)
-      return alert(res.msg);
-
-    alert(res.msg)
+    if (res.msg)
+      this.commonFunctionsService.showSnackBar(res.msg)
   }
 
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.ItemId = params['id'];
+    });
+
+    // Fetching details from shared
+    this.route.queryParams.subscribe(params => {
+      this.Title = params['title'];
+      this.Url = params['text'];
+      this.Description = params['url'];
     });
   }
 

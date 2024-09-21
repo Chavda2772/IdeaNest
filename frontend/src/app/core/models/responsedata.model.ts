@@ -2,7 +2,7 @@ import { UserDetails } from "./userDetails.model";
 
 export interface Responsedata {
   success: boolean;
-  msg?: String;
+  msg?: string;
   token?: string;
   result? : UserDetails
 }
