@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
 const { logger } = require('./config/logger.js');
-const { authenticate } = require('./service/auth.js');
+const { authenticate } = require('./controller/authController');
 
 // Enviroment Config
 if (process.env.NODE_ENV != 'production') {
@@ -12,10 +12,10 @@ if (process.env.NODE_ENV != 'production') {
 }
 
 // Routes
-const indexRouter = require('./routes/index');
-const userRouter = require('./routes/user');
-const collectionRoute = require('./routes/collectionOperation.js');
-const itemOperationRoute = require('./routes/itemOperation.js');
+const indexRouter = require('./routes/indexRouter');
+const userRouter = require('./routes/userRoute');
+const collectionRoute = require('./routes/collectionRouter.js');
+const itemOperationRoute = require('./routes/itemRouter.js');
 
 // Application configuration
 logger.info('Configure Application settings.');

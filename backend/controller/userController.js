@@ -1,18 +1,12 @@
 // Packages
-const express = require('express');
 const createError = require('http-errors');
 
 // Imports
-const router = express.Router();
-const {
-  AddUser,
-  GetUserDetails,
-  IsUserNameExists,
-} = require('../controller/user');
-const { generateToken, authenticate } = require('../service/auth');
+const userService = require('../service/userService');
+const { generateToken } = require('../controller/authController');
 
 // Register User
-router.post('/register', async function (req, res, next) {
+module.exports.registerUser = async function (req, res, next) {
   let {
     UserName,
     FirstName,
@@ -30,12 +24,12 @@ router.post('/register', async function (req, res, next) {
     return res.send({ success: false, msg: 'Invalid details' });
 
   // UserName already Exists
-  let isUserExists = await IsUserNameExists(UserName);
+  let isUserExists = await userService.IsUserNameExists(UserName);
   if (isUserExists)
     return res.send({ success: false, msg: 'UserName already exists' });
 
   try {
-    await AddUser({
+    await userService.AddUser({
       UserName,
       FirstName,
       MiddleName,
@@ -54,16 +48,17 @@ router.post('/register', async function (req, res, next) {
   } catch (error) {
     next(createError('Error in user operation'));
   }
-});
+};
 
 // Login User
-router.post('/login', async function (req, res, next) {
+module.exports.loginUser = async function (req, res, next) {
   try {
     let { Email, Password } = req.body;
-    let userData = await GetUserDetails(Email);
+    let userData = await userService.GetUserDetails(Email);
 
     // User found validation
-    if (!userData) return res.send({ success: false, msg: 'User not found' });
+    if (!userData) 
+      return res.send({ success: false, msg: 'User not found' });
 
     // Password verification
     if (Password != userData.Password)
@@ -94,13 +89,13 @@ router.post('/login', async function (req, res, next) {
   } catch (error) {
     next(createError('Something went wrong. Try again'));
   }
-});
+};
 
 // Fetch User Details
-router.post('/getDetails', authenticate, async function (req, res, next) {
+module.exports.getDetails = async function (req, res, next) {
   try {
     let { Email } = req.data;
-    let userData = await GetUserDetails(Email);
+    let userData = await userService.GetUserDetails(Email);
 
     // Send user details
     return res.send({
@@ -120,10 +115,4 @@ router.post('/getDetails', authenticate, async function (req, res, next) {
   } catch (error) {
     next(createError('Error while getting details.'));
   }
-});
-
-router.post('/', function (req, res, next) {
-  next(createError('Not Implimanted'));
-});
-
-module.exports = router;
+};
