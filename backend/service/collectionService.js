@@ -16,7 +16,7 @@ module.exports.getDetails = async (data) => {
                         if (error) {
                             reject(error);
                         }
-                        resolve({ Collection: results[0], Items: results[1] });
+                        resolve({ CollectionName: results[0][0]?.CollectionName, Collections: results[1], Items: results[2] });
                     }
                 );
             } else {

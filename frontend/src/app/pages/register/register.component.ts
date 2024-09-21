@@ -14,8 +14,7 @@ import { UserDetails } from '../../core/models/userDetails.model';
   selector: 'app-register',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent {
   _registerForm: FormGroup;

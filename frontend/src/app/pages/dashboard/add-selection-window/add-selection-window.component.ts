@@ -10,8 +10,7 @@ import { AddUpdateFolderComponent } from '../add-update-folder/add-update-folder
   selector: 'app-add-selection-window',
   standalone: true,
   imports: [MatDialogModule, MatFormFieldModule, FormsModule],
-  templateUrl: './add-selection-window.component.html',
-  styleUrl: './add-selection-window.component.css'
+  templateUrl: './add-selection-window.component.html'
 })
 export class AddSelectionWindowComponent {
   // Inject

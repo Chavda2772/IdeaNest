@@ -25,8 +25,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE PROCEDURE `usp_CollectionDetail_IU`(IN `_collectionId` INT, IN `_collectionName` NVARCHAR(55), IN `_collectionParentId` INT, IN `_createdBy` INT)
-BEGIN
+CREATE PROCEDURE `usp_CollectionDetail_IU`(IN `_collectionId` INT, IN `_collectionName` NVARCHAR(55), IN `_collectionParentId` INT, IN `_createdBy` INT)   BEGIN
 -- Update
 if(_collectionId > 0) THEN
 	UPDATE CollectionDetails 
@@ -51,8 +50,10 @@ CREATE PROCEDURE `usp_deleteNestItem` (IN `_id` INT, IN `_createdBy` INT)   BEGI
   WHERE id = _id And CreatedBy = _createdBy;
 END$$
 
-CREATE PROCEDURE `usp_getCollectionAndItemsDetails`(IN `_collectionId` INT, IN `_userId` INT)
-BEGIN
+CREATE PROCEDURE `usp_getCollectionAndItemsDetails`(IN `_collectionId` INT, IN `_userId` INT)  BEGIN
+    -- Fetching collection name
+    SELECT CollectionName FROM collectiondetails WHERE CollectionId = _collectionId;
+    
     -- Fetching collection details
     SELECT CollectionId, CollectionName 
     FROM CollectionDetails 
@@ -236,7 +237,13 @@ ALTER TABLE `CollectionDetails`
   ADD KEY `fk_colectionCreatedBy_UserInfoUserId` (`CreatedBy`);
 
 --
--- Indexes for table `NestItems`
+-- Indexes for table `ConfigurationMaster`
+--
+ALTER TABLE `ConfigurationMaster`
+  ADD PRIMARY KEY (`ConfigId`);
+
+--
+-- Indexes for table `nestitems`
 --
 ALTER TABLE `NestItems`
   ADD PRIMARY KEY (`Id`),

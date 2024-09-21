@@ -9,8 +9,7 @@ import { ItemOperationService } from '../../core/services/item-operation.service
   selector: 'app-add-update',
   standalone: true,
   imports: [FooterNavigationComponent, NavbarComponent, FormsModule],
-  templateUrl: './add-update.component.html',
-  styleUrl: './add-update.component.css'
+  templateUrl: './add-update.component.html'
 })
 export class AddUpdateComponent implements OnInit {
   // Inject classes

@@ -1,12 +1,24 @@
 import { Component, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+  MatDialogModule
+} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-confirm-message',
   standalone: true,
-  imports: [MatDialogContent, MatDialogActions],
-  templateUrl: './confirm-message.component.html',
-  styleUrl: './confirm-message.component.css'
+  imports: [MatDialogClose, MatDialogContent, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatDialogActions],
+  templateUrl: './confirm-message.component.html'
 })
 export class ConfirmMessageComponent {
   // Injectables
@@ -17,14 +29,13 @@ export class ConfirmMessageComponent {
   title: string = this.data.title;
   msg: string = this.data.msg;
   cancelText: string = this.data.cancelText ?? "Cancel";
-  okText: string = this.data.okText ?? "Ok";
+  confirmText: string = this.data.confirmText ?? "Confirm";
 
   // Methods
   onClose() {
-    this.dialogRef.close();
+    this.dialogRef.close('cancel');
   }
-  onOkClick() {
-    console.warn('Method not implemented.');
+  onConfirmClick() {
+    this.dialogRef.close('confirm');
   }
-
 }

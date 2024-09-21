@@ -6,25 +6,30 @@
   allowfullscreen
 ></iframe> -->
 
-<div class="min-h-dvh bg-white dark:bg-gray-300">
-  <app-navbar Title="Home" />
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+<div class="min-h-dvh flex flex-col bg-white dark:bg-gray-300 relative">
+  <app-navbar [Title]="CollectionName" />
+ 
+  <!-- NO Records -->
+  @if (CollectionDetail?.Items?.length == 0 && CollectionDetail?.Collections?.length == 0) {
+    <div class="flex-1 flex justify-center items-center">
+      <h1>NO DATA FOUND !!!</h1>
+    </div>
+  }
+  <!-- Only generate content if has details -->
+  @else {
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 flex-1">
     <!-- Generate Collection List-->
-    @for (item of CollectionList?.Collection; track item.CollectionId) {
+    @for (item of CollectionDetail?.Collections; track item.CollectionId) {
     <app-nest-folder [CollectionId]="item.CollectionId" [CollectionName]="item.CollectionName"></app-nest-folder>
     }
-
+  
     <!-- Generate Items List -->
-    @for (item of CollectionList?.Items; track item.id) {
-    <app-nest-item [title]="item.Title" [url]="item.Url" [urlImage]="item.UrlImage"
-      [urlDescription]="item.UrlDescription" [urlDomain]="item.UrlDomain" [description]="item.Description">
+    @for (item of CollectionDetail?.Items; track item.id) {
+    <app-nest-item [title]="item.Title" [url]="item.Url" [urlImage]="item.UrlImage" [urlDescription]="item.UrlDescription"
+      [urlDomain]="item.UrlDomain" [description]="item.Description">
     </app-nest-item>
     }
-
-    <!-- NO Records -->
-    @if (CollectionList?.Items?.length == 0 && CollectionList?.Collection?.length == 0) {
-    <h1>NO DATA FOUND !!!</h1>
-    }
   </div>
+  }
   <app-footer-navigation (addClickEvent)="onFooterAddClick()" />
 </div>

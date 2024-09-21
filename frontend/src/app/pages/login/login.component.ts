@@ -8,8 +8,7 @@ import { LocalStorageConst } from '../../core/constants/LocalStorageConst';
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
   // Dependency Injection with constructor

@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
   selector: 'app-nest-folder',
   standalone: true,
   imports: [],
-  templateUrl: './nest-folder.component.html',
-  styleUrl: './nest-folder.component.css'
+  templateUrl: './nest-folder.component.html'
 })
 export class NestFolderComponent {
   // Inject 

@@ -9,8 +9,7 @@ import { CollectionOperationService } from '../../../core/services/collection-op
   selector: 'app-add-update-folder',
   standalone: true,
   imports: [MatDialogModule, MatFormFieldModule, FormsModule],
-  templateUrl: './add-update-folder.component.html',
-  styleUrl: './add-update-folder.component.css'
+  templateUrl: './add-update-folder.component.html'
 })
 export class AddUpdateFolderComponent implements OnInit {
   // Inject

@@ -25,8 +25,7 @@ import { AddSelectionWindowComponent } from './add-selection-window/add-selectio
     NavbarComponent,
     NestFolderComponent
   ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
   constructor(private route: ActivatedRoute, private dialogRef: MatDialog) { }
@@ -39,7 +38,8 @@ export class DashboardComponent implements OnInit {
 
   // Variables
   CollectionId: number | undefined;
-  CollectionList: CollectionResponse | undefined;
+  CollectionName: string = "";
+  CollectionDetail: CollectionResponse | undefined;
 
   // Fetch user Details
   ngOnInit(): void {
@@ -59,7 +59,9 @@ export class DashboardComponent implements OnInit {
 
   // Fetch details
   async refreshCollectionAndItems() {
-    this.CollectionList = await this.collectionOperationService.getCollectionAndItems(this.CollectionId);
+    let collectionDetails = await this.collectionOperationService.getCollectionAndItems(this.CollectionId);
+    this.CollectionDetail = collectionDetails;
+    this.CollectionName = collectionDetails.CollectionName ?? "Home";
   }
 
 

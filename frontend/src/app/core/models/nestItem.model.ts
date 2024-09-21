@@ -22,6 +22,7 @@ export interface CollectionResponse {
     success: boolean;
     msg?: String;
     token?: string;
-    Collection: CollectionDetails[],
+    CollectionName?: string,
+    Collections: CollectionDetails[],
     Items: NestItem[],
 }

@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
   selector: 'app-page-not-found',
   standalone: true,
   imports: [],
-  templateUrl: './page-not-found.component.html',
-  styleUrl: './page-not-found.component.css',
+  templateUrl: './page-not-found.component.html'
 })
 export class PageNotFoundComponent {
   constructor(private router: Router) {}
+  
   onHomeClick() {
     this.router.navigate(['dashboard']);
   }

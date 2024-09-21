@@ -1,10 +1,8 @@
-<h2 mat-dialog-title>{{title}}</h2>
+<h6 class="font-normal pl-5 pt-2" mat-dialog-title>{{title}}</h6>
 <mat-dialog-content>
-    <h4>{{msg}}</h4>
+    {{msg}}
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button (click)="onClose()">{{cancelText}}</button>
-    <button mat-button (click)="onOkClick()">{{okText}}</button>
-    <button color="primary" mat-stroked-button>Basic</button>
-    <button mat-flat-button>Basic</button>
+    <button mat-button (click)="onConfirmClick()" cdkFocusInitial>{{confirmText}}</button>
 </mat-dialog-actions>

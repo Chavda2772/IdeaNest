@@ -76,9 +76,16 @@ export class CommonFunctionsService {
   }
 
   // Show confirm message
-  showconfirmMessage(title: string, msg: string, cancelText?: string, okText?: string, config: MatDialogConfig | any = {}) {
-    config.data = { title: title, msg: msg, cancelText: cancelText, okText: okText };
-    return this.dialog.open(ConfirmMessageComponent, config);
+  showconfirmMessage(title: string, msg: string, cancelText?: string, confirmText?: string, config: MatDialogConfig | any = {}) {
+    return this.dialog.open(ConfirmMessageComponent, {
+      ...config,
+      data: {
+        title: title,
+        msg: msg,
+        cancelText,
+        confirmText
+      }
+    });
   }
 
   // Show Sna
