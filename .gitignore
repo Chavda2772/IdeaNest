@@ -17,7 +17,3 @@ frontend_restructure/dist
 Backend/.env
 Backend/node_modules
 Backend/Logs
-
-
-#Extra
-frontend_redesign/
