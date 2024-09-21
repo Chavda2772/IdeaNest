@@ -1,5 +1,10 @@
 var { createPool } = require('mysql');
 
+// Enviroment Config
+if (process.env.NODE_ENV != 'production') {
+  require('dotenv').config();
+}
+
 var pool = createPool({
   host: process.env.DB_HOSTNAME,
   user: process.env.DB_USERNAME,

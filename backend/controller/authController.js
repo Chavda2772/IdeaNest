@@ -2,20 +2,26 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+// imports
+const { getMasterConfig } = require("../config/masterConfig")
+const Enums = require('../config/Enums')
+
 // Configs
-const tokenSecret = "WZhgQujPmWmjY76rxM77aSvpQMrpo8ZXNpcZFFMXdWJt2BfsdfNjF4PN0N4mDaVstGP58F4auFzeC";
-const tokenExpireTime = 60;
 const saltRounds = 10;
 
 // JWT
 module.exports.generateToken = async function (user) {
+    const tokenSecret = await getMasterConfig(Enums.masterConfigId.tokenSecret);
+    const expireTime = await getMasterConfig(Enums.masterConfigId.tokenExpireTime);
+
     return jwt.sign({ data: user }, tokenSecret, {
-        expiresIn: tokenExpireTime * 60,
+        expiresIn: expireTime * 60,
     });
 }
 
-module.exports.authenticate = function (req, res, next) {
+module.exports.authenticate = async function (req, res, next) {
     const token = req.header('Authorization');
+    const tokenSecret  = await getMasterConfig(Enums.masterConfigId.tokenSecret);
 
     // Token check
     if (!token) {

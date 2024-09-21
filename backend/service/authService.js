@@ -13,7 +13,7 @@ module.exports.getMasterConfigByName = async function (configName) {
             if (error) {
               reject(error);
             }
-            resolve(results);
+            resolve(results[0][0].ConfigValue);
           }
         );
       } else {
