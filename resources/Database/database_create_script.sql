@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2024 at 04:34 AM
+-- Generation Time: Sep 21, 2024 at 12:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -25,7 +25,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE PROCEDURE `usp_CollectionDetail_IU`(IN `_collectionId` INT, IN `_collectionName` NVARCHAR(55), in _collectionParentId int, IN `_createdBy` INT)
+CREATE PROCEDURE `usp_CollectionDetail_IU`(IN `_collectionId` INT, IN `_collectionName` NVARCHAR(55), IN `_collectionParentId` INT, IN `_createdBy` INT)
 BEGIN
 -- Update
 if(_collectionId > 0) THEN
@@ -79,6 +79,13 @@ CREATE PROCEDURE `usp_getCollectionDetails` (IN `_collectionId` INT, IN `_userId
     WHERE CreatedBy = _userId AND 
           (ParentCollectionId = _collectionId OR (_collectionId IS NULL AND ParentCollectionId IS NULL));
 END$$
+
+CREATE PROCEDURE `usp_getConfigValueByName` (IN `_configName` TEXT)   BEGIN
+	  SELECT ConfigValue 
+    FROM ConfigurationMaster 
+    WHERE ConfigName = _configName;
+END$$
+
 CREATE PROCEDURE `usp_getDetailsByItemId` (IN `_id` INT)   BEGIN
 	SELECT Id, Title, Description, CAST(IsPreview AS UNSIGNED) as IsPreview, Url, UrlTitle, UrlImage, UrlDescription, UrlDomain 
     FROM NestItems 
@@ -124,7 +131,6 @@ END$$
 
 CREATE PROCEDURE `usp_userDetails_UI` (IN `_userId` INT, IN `_userName` VARCHAR(60), IN `_firstName` VARCHAR(45), IN `_middleName` VARCHAR(45), IN `_lastName` VARCHAR(45), IN `_email` VARCHAR(101), IN `_password` VARCHAR(120), IN `_contactNo` VARCHAR(12), IN `_theme` VARCHAR(15), IN `_profileUrl` VARCHAR(500))   BEGIN
 
-
 IF (_userId > 0) THEN
 		UPDATE UserInfo
         SET FirstName = _firstName,
@@ -161,7 +167,28 @@ CREATE TABLE `CollectionDetails` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `NestItems`
+-- Table structure for table `ConfigurationMaster`
+--
+
+CREATE TABLE `ConfigurationMaster` (
+  `ConfigId` int(11) NOT NULL,
+  `ConfigName` varchar(500) NOT NULL,
+  `ConfigValue` longtext NOT NULL,
+  `Description` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `configurationmaster`
+--
+
+INSERT INTO `ConfigurationMaster` (`ConfigId`, `ConfigName`, `ConfigValue`, `Description`) VALUES
+(1, 'TOKEN_EXPIRE_TIME', '60', 'jwt Token expire time in minutes'),
+(2, 'TOKEN_SECRET', 'zhXbmjgu8efTgWA4dfPEdzx3dznxa', 'jwt token secret');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nestitems`
 --
 
 CREATE TABLE `NestItems` (
@@ -230,6 +257,12 @@ ALTER TABLE `UserInfo`
 --
 ALTER TABLE `collectiondetails`
   MODIFY `CollectionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for table `configurationmaster`
+--
+ALTER TABLE `configurationmaster`
+  MODIFY `ConfigId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nestitems`
