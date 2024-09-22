@@ -12,9 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class FooterNavigationComponent {
   // Inject service
-  userService = inject(UserService);
   router = inject(Router);
-  commonFunctionsService = inject(CommonFunctionsService);
 
   // Variables
   @Output() addClickEvent = new EventEmitter();
@@ -31,19 +29,5 @@ export class FooterNavigationComponent {
 
   onSettingsClick() {
     console.warn('PENDING')
-  }
-
-  onProfileClick() {
-    console.warn('PENDING')
-  }
-
-  // Logout
-  onLogoutClick(): void {
-    this.commonFunctionsService.showconfirmMessage("Logout", "Are you sure want to logout?", "No", "Yes")
-      .beforeClosed()
-      .subscribe(result => {
-        if (result == 'confirm')
-          this.userService.Logout();
-      })
   }
 }

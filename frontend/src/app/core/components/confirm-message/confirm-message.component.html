@@ -3,6 +3,6 @@
     {{msg}}
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button (click)="onClose()">{{cancelText}}</button>
-    <button mat-button (click)="onConfirmClick()" cdkFocusInitial>{{confirmText}}</button>
+    <button mat-button (click)="onClose()" cdkFocusInitial>{{cancelText}}</button>
+    <button mat-button (click)="onConfirmClick()">{{confirmText}}</button>
 </mat-dialog-actions>
