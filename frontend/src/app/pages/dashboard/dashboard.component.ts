@@ -8,7 +8,7 @@ import { FooterNavigationComponent } from '../../core/components/footer-navigati
 import { NavbarComponent } from '../../core/components/navbar/navbar.component';
 import { UserService } from '../../core/services/user.service';
 import { CollectionOperationService } from '../../core/services/collection-operation.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CollectionResponse } from '../../core/models/nestItem.model';
 import { NestFolderComponent } from "./nest-folder/nest-folder.component";
 import { MatDialog } from '@angular/material/dialog';
@@ -32,13 +32,14 @@ import { animate, style } from '@angular/animations';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private dialogRef: MatDialog) { }
+  constructor(private activeRoute: ActivatedRoute, private dialogRef: MatDialog) { }
 
   // inject
   commonFunctions = inject(CommonFunctionsService);
   userService = inject(UserService);
   collectionOperationService = inject(CollectionOperationService);
   nestOperationService = inject(NestOperationService);
+  router = inject(Router);
 
   // Variables
   CollectionId: number | undefined;
@@ -58,7 +59,7 @@ export class DashboardComponent implements OnInit {
 
   // Fetch user Details
   ngOnInit(): void {
-    this.route.params.subscribe(async params => {
+    this.activeRoute.params.subscribe(async params => {
       this.CollectionId = params['id'];
       // If user is not authorized then logout
       try {
@@ -92,5 +93,10 @@ export class DashboardComponent implements OnInit {
     }).afterClosed().subscribe(() => {
       // TODO: Refresh on adding item or Collection
     });
+  }
+
+  onIconClick() {
+    let path = 'add' + (this.CollectionId ? `/${this.CollectionId}` : '');
+    this.router.navigate([path]);
   }
 }

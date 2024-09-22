@@ -1,21 +1,23 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FooterNavigationComponent } from "../../core/components/footer-navigation/footer-navigation.component";
 import { NavbarComponent } from "../../core/components/navbar/navbar.component";
 import { FormsModule } from '@angular/forms';
 import { ItemOperationService } from '../../core/services/item-operation.service';
 import { CommonFunctionsService } from '../../core/utility/common-functions.service';
+import { NestItemComponent } from '../dashboard/nest-item/nest-item.component';
 
 @Component({
   selector: 'app-add-update',
   standalone: true,
-  imports: [FooterNavigationComponent, NavbarComponent, FormsModule],
+  imports: [FooterNavigationComponent, NavbarComponent, FormsModule, NestItemComponent],
   templateUrl: './add-update.component.html'
 })
 export class AddUpdateComponent implements OnInit {
   // Inject classes
   itemOperationService = inject(ItemOperationService);
   commonFunctionsService = inject(CommonFunctionsService);
+  router = inject(Router);
 
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(async params => {
@@ -25,9 +27,9 @@ export class AddUpdateComponent implements OnInit {
 
   // Variables
   ItemId: number | undefined;
-  Title: string | undefined;
-  Description: string | undefined;
-  Url: string | undefined;
+  Title: string = "";
+  Description: string = "";
+  Url: string = "";
   ParentCollectionId: number | null = null;
 
   async onFormSubmit() {
@@ -44,8 +46,12 @@ export class AddUpdateComponent implements OnInit {
 
     if (res.msg)
       this.commonFunctionsService.showSnackBar(res.msg)
-  }
 
+    if (res.success) {
+      let path = 'dashboard' + (this.ParentCollectionId ? `/${this.ParentCollectionId}` : '');
+      this.router.navigate([path])
+    }
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
