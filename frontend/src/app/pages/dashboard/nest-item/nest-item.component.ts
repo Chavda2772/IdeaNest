@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-nest-item',
   standalone: true,
   imports: [],
-  templateUrl: './nest-item.component.html'  
+  templateUrl: './nest-item.component.html'
 })
 export class NestItemComponent {
   @Input() title = '';

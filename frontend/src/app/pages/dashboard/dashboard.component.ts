@@ -25,7 +25,8 @@ import { AddSelectionWindowComponent } from './add-selection-window/add-selectio
     NavbarComponent,
     NestFolderComponent
   ],
-  templateUrl: './dashboard.component.html'
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
   constructor(private route: ActivatedRoute, private dialogRef: MatDialog) { }
