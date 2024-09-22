@@ -13,6 +13,8 @@ import { CollectionResponse } from '../../core/models/nestItem.model';
 import { NestFolderComponent } from "./nest-folder/nest-folder.component";
 import { MatDialog } from '@angular/material/dialog';
 import { AddSelectionWindowComponent } from './add-selection-window/add-selection-window.component';
+import { NgxMasonryModule, NgxMasonryOptions } from 'ngx-masonry';
+import { animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +25,8 @@ import { AddSelectionWindowComponent } from './add-selection-window/add-selectio
     NgIf,
     FooterNavigationComponent,
     NavbarComponent,
-    NestFolderComponent
+    NestFolderComponent,
+    NgxMasonryModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
@@ -41,6 +44,17 @@ export class DashboardComponent implements OnInit {
   CollectionId: number | undefined;
   CollectionName: string = "";
   CollectionDetail: CollectionResponse | undefined;
+  masonryOptions: NgxMasonryOptions = {
+    gutter: 20,
+    horizontalOrder: true,
+    resize: true,
+    animations: {
+      show: [
+        style({ opacity: 0 }),
+        animate('400ms ease-in', style({ opacity: 1 })),
+      ],
+    }
+  };
 
   // Fetch user Details
   ngOnInit(): void {
