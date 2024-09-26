@@ -52,7 +52,7 @@ END$$
 
 CREATE PROCEDURE `usp_getCollectionAndItemsDetails`(IN `_collectionId` INT, IN `_userId` INT)  BEGIN
     -- Fetching collection name
-    SELECT CollectionName FROM collectiondetails WHERE CollectionId = _collectionId;
+    SELECT CollectionName FROM CollectionDetails WHERE CollectionId = _collectionId;
     
     -- Fetching collection details
     SELECT CollectionId, CollectionName 
@@ -179,7 +179,7 @@ CREATE TABLE `ConfigurationMaster` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `configurationmaster`
+-- Dumping data for table `ConfigurationMaster`
 --
 
 INSERT INTO `ConfigurationMaster` (`ConfigId`, `ConfigName`, `ConfigValue`, `Description`) VALUES
@@ -189,7 +189,7 @@ INSERT INTO `ConfigurationMaster` (`ConfigId`, `ConfigName`, `ConfigValue`, `Des
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nestitems`
+-- Table structure for table `NestItems`
 --
 
 CREATE TABLE `NestItems` (
@@ -243,7 +243,7 @@ ALTER TABLE `ConfigurationMaster`
   ADD PRIMARY KEY (`ConfigId`);
 
 --
--- Indexes for table `nestitems`
+-- Indexes for table `NestItems`
 --
 ALTER TABLE `NestItems`
   ADD PRIMARY KEY (`Id`),
@@ -260,27 +260,27 @@ ALTER TABLE `UserInfo`
 --
 
 --
--- AUTO_INCREMENT for table `collectiondetails`
+-- AUTO_INCREMENT for table `CollectionDetails`
 --
-ALTER TABLE `collectiondetails`
+ALTER TABLE `CollectionDetails`
   MODIFY `CollectionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
--- AUTO_INCREMENT for table `configurationmaster`
+-- AUTO_INCREMENT for table `ConfigurationMaster`
 --
-ALTER TABLE `configurationmaster`
+ALTER TABLE `ConfigurationMaster`
   MODIFY `ConfigId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `nestitems`
+-- AUTO_INCREMENT for table `NestItems`
 --
-ALTER TABLE `nestitems`
+ALTER TABLE `NestItems`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
--- AUTO_INCREMENT for table `userinfo`
+-- AUTO_INCREMENT for table `UserInfo`
 --
-ALTER TABLE `userinfo`
+ALTER TABLE `UserInfo`
   MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 
