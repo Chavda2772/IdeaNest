@@ -1,11 +1,10 @@
 // Third party
-const linkPreview = require('link-preview-js');
-const linkPreviewGenerator = require('link-preview-generator');
 const createError = require('http-errors');
 
 
 // imports
 const itemService = require('../service/itemService');
+const { fetchUrlDetails } = require('../common/utilityFunction')
 
 // Fetching Nest Item
 module.exports.getItemDetails = async function (req, res, next) {
@@ -162,69 +161,4 @@ module.exports.deleteItem = async function (req, res, next) {
   } catch (error) {
     next(error);
   }
-};
-
-// *****************
-// Helper functions
-// *****************
-
-// Fetch URL Details
-fetchUrlDetails = async (url) => {
-  return new Promise(async function (resolve, reject) {
-    // validate
-    if (!url) reject('URL cannot blank');
-
-    // Checking for actual URL
-    try {
-      new URL(url);
-    } catch (error) {
-      reject(createError('Invalide URL'));
-    }
-
-    // Fetch Details By Link Preview
-    generateUrlPreivewDetails(url)
-      .then((responseData) => {
-        resolve(responseData);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};
-
-// Get URL Details by LinkPreview
-getUrlDetailsByLinkPreview = async (url) => {
-  return new Promise(function (resolve, reject) {
-    linkPreview
-      .getLinkPreview(url)
-      .then((responseData) => {
-        resolve({
-          title: responseData.title,
-          image: responseData.images[0],
-          description: responseData.description ?? '',
-          domain: new URL(url)?.host?.replace('www.', ''),
-        });
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};
-
-// Get URL Details by Link-preview-generator
-generateUrlPreivewDetails = async (url) => {
-  return new Promise(function (resolve, reject) {
-    linkPreviewGenerator(url)
-      .then((responseData) => {
-        resolve({
-          title: responseData.title,
-          image: responseData.img,
-          description: responseData.description,
-          domain: responseData.domain,
-        });
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
 };
