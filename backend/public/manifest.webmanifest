@@ -1,8 +1,8 @@
 {
-  "name": "IdeaNestUI",
-  "short_name": "IdeaNestUI",
+  "name": "IdeaNest",
+  "short_name": "IdeaNest",
   "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "background_color": "#1976d2",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
@@ -55,5 +55,14 @@
       "type": "image/png",
       "purpose": "maskable any"
     }
-  ]
+  ],
+  "share_target": {
+    "action": "/add",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }
