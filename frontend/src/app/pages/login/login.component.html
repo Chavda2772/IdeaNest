@@ -1,7 +1,7 @@
 <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100">
-      <div class="login100-pic js-tilt" data-tilt>
+      <div class="login100-pic" data-tilt>
         <img src="images/login.png" alt="IMG">
       </div>
 
@@ -10,7 +10,9 @@
           Login
         </span>
 
-        <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+        <div class="wrap-input100 validate-input"
+          [class.alert-validate]="_loginForm.controls['email'].invalid && validated "
+          data-validate="Valid email is required: example@abc.xyz">
           <input class="input100" type="text" name="email" placeholder="Email" formControlName="email">
           <span class="focus-input100"></span>
           <span class="symbol-input100">
@@ -18,7 +20,9 @@
           </span>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate="Password is required">
+        <div class="wrap-input100 validate-input"
+          [class.alert-validate]="_loginForm.controls['password'].invalid && validated"
+          data-validate="Password is required">
           <input class="input100" type="password" name="pass" placeholder="Password" formControlName="password">
           <span class="focus-input100"></span>
           <span class="symbol-input100">
@@ -42,7 +46,7 @@
           </a>
         </div> -->
 
-        <div class="text-center m-t-136 cursor-pointer" (click)="navigateToRegister()">
+        <div class="text-center m-t-50 cursor-pointer" (click)="navigateToRegister()">
           Create your Account
           <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
         </div>

@@ -39,27 +39,17 @@ export class LoginComponent implements OnInit {
 
   // Form variables
   _loginForm: FormGroup;
+  validated: boolean = false;
 
   // Methods
   async onFormSubmit() {
     // validate details
     if (this._loginForm.invalid) {
-      // Email Vaidation
-      if (this._loginForm.controls['email'].value.trim() == '') {
-        this.commonFunctionsService.showSnackBar('Email cannot be blank.');
-        return
-      }
 
-      if (this._loginForm.controls['email'].invalid) {
-        this.commonFunctionsService.showSnackBar('Invalid Email address.');
-        return
-      }
-
-      // Password Vaidation
-      if (this._loginForm.controls['password'].invalid) {
-        this.commonFunctionsService.showSnackBar('Password cannot be blank.');
-        return
-      }
+      // To show validation messages
+      this.validated = true;
+      this.commonFunctionsService.showSnackBar('Invalid details');
+      return
     }
 
     // Submit request
@@ -75,6 +65,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    // Error in login
     localStorage.removeItem(LocalStorageConst.TokenKey);
     console.error(resData.msg);
     if (resData.msg)
