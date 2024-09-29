@@ -1,11 +1,11 @@
-const linkPreviewGenerator = require('link-preview-generator');
+const linkPreviewGenerator = require('../third_party/link-preview-generator');
 const createError = require('http-errors')
 
 // Fetch URL Details
 module.exports.fetchUrlDetails = async (url) => {
     return new Promise(async function (resolve, reject) {
         // validate
-        if (!url) 
+        if (!url)
             return reject(createError('URL cannot blank'));
 
         // Checking for actual URL
