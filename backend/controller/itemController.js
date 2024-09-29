@@ -57,7 +57,7 @@ module.exports.insertItem = async function (req, res, next) {
       if (urlDetail) {
         isPreview = true;
         urlTitle = urlDetail.title;
-        urlImage = urlDetail.image;
+        urlImage = urlDetail.img;
         urlDescription = urlDetail.description;
         urlDomain = urlDetail.domain;
       }
@@ -120,7 +120,7 @@ module.exports.updateItem = async function (req, res, next) {
       if (urlDetail) {
         isPreview = true;
         urlTitle = urlDetail.title;
-        urlImage = urlDetail.image;
+        urlImage = urlDetail.img;
         urlDescription = urlDetail.description;
         urlDomain = urlDetail.domain;
       }
