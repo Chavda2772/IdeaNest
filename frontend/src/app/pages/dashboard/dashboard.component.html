@@ -15,8 +15,8 @@
       <!-- Generate Collection List -->
       <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3">
         @for (item of CollectionDetail?.Collections; track item.CollectionId) {
-        <app-nest-folder ngxMasonryItem [CollectionId]="item.CollectionId"
-          [CollectionName]="item.CollectionName"></app-nest-folder>
+        <app-nest-folder ngxMasonryItem [CollectionId]="item.CollectionId" [CollectionName]="item.CollectionName"
+          (refreshDetail)="refreshCollectionAndItems()"></app-nest-folder>
         }
       </div>
       <div>

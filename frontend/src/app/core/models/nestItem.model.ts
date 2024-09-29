@@ -14,13 +14,13 @@ export interface NestItem {
 // Used For Single Collection Items
 export interface CollectionDetails {
     CollectionId: number,
-    CollectionName: String
+    CollectionName: string
 }
 
 // Used for Collection Response
 export interface CollectionResponse {
     success: boolean;
-    msg?: String;
+    msg?: string;
     token?: string;
     CollectionName?: string,
     Collections: CollectionDetails[],

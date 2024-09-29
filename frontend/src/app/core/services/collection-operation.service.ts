@@ -12,8 +12,8 @@ export class CollectionOperationService {
   // Inject
   proxyBase = inject(ProxyBaseService);
 
-  // API Calls
-  async getCollectionAndItems(collectionId: Number | undefined) {
+  // Get collection
+  async getCollectionAndItems(collectionId: number | undefined) {
     let api = ApiEndpoints.Collection.Get + (collectionId ? '/' + collectionId : '');
     let resData = await this.proxyBase.request<CollectionResponse>('get', api)
 
@@ -21,7 +21,7 @@ export class CollectionOperationService {
   }
 
   // Adding collection
-  async addCollection(CollectionName: String, CollectionParentId: Number | null) {
+  async addCollection(CollectionName: String, CollectionParentId: number | null) {
     let resData = await this.proxyBase.request<Responsedata>('post', ApiEndpoints.Collection.Add, {
       CollectionName: CollectionName,
       CollectionParentId: CollectionParentId
@@ -30,13 +30,19 @@ export class CollectionOperationService {
     return resData as Responsedata;
   }
 
-  // Adding collection
+  // Update collection
   async updateCollection(id: number, name: string) {
     let resData = await this.proxyBase.request<Responsedata>('put', ApiEndpoints.Collection.Add, {
       CollectionId: id,
       CollectionName: name
     })
 
+    return resData as Responsedata;
+  }
+
+  // Delete collection
+  async deleteCollection(id: number) {
+    let resData = await this.proxyBase.request<Responsedata>('delete', `${ApiEndpoints.Collection.Add}/${id}`)
     return resData as Responsedata;
   }
 }

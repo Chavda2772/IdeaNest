@@ -31,7 +31,7 @@ export class NestItemComponent {
 
   // methods
   onDeleteItem() {
-    this.commonFunctions.showconfirmMessage("Logout", "Are you sure want to delete?", "No", "Yes")
+    this.commonFunctions.showconfirmMessage("Nest item", "Are you sure want to delete?", "No", "Yes")
       .beforeClosed()
       .subscribe(async result => {
         if (result == 'confirm') {
