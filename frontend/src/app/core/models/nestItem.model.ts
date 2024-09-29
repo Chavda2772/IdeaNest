@@ -1,6 +1,6 @@
 // Used for Single Nest Item
 export interface NestItem {
-    id: Number,
+    id: number,
     Title: string,
     Description: string,
     IsPreview: boolean,
@@ -13,7 +13,7 @@ export interface NestItem {
 
 // Used For Single Collection Items
 export interface CollectionDetails {
-    CollectionId: Number,
+    CollectionId: number,
     CollectionName: String
 }
 
@@ -25,4 +25,10 @@ export interface CollectionResponse {
     CollectionName?: string,
     Collections: CollectionDetails[],
     Items: NestItem[],
+}
+
+export interface ItemResponseData {
+    success: boolean;
+    msg?: string;
+    result: NestItem
 }

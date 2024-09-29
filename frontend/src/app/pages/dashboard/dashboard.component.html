@@ -22,8 +22,9 @@
       <div>
         @for (item of CollectionDetail?.Items; track item.id) {
         <!-- Generate Items List -->
-        <app-nest-item ngxMasonryItem [title]="item.Title" [url]="item.Url" [urlImage]="item.UrlImage"
-          [urlDescription]="item.UrlDescription" [urlDomain]="item.UrlDomain" [description]="item.Description">
+        <app-nest-item ngxMasonryItem [itemId]="item.id" [title]="item.Title" [url]="item.Url"
+          [urlImage]="item.UrlImage" [urlDescription]="item.UrlDescription" [urlDomain]="item.UrlDomain"
+          [description]="item.Description" (deleteEmitter)="onDeleteItem()">
         </app-nest-item>
         }
       </div>

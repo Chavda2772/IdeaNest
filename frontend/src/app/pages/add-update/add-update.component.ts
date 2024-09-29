@@ -15,8 +15,8 @@ import { NestItemComponent } from '../dashboard/nest-item/nest-item.component';
 })
 export class AddUpdateComponent implements OnInit {
   // Inject classes
-  itemOperationService = inject(ItemOperationService);
-  commonFunctionsService = inject(CommonFunctionsService);
+  itemOperation = inject(ItemOperationService);
+  commonFunctions = inject(CommonFunctionsService);
   router = inject(Router);
 
   constructor(private route: ActivatedRoute) {
@@ -26,18 +26,24 @@ export class AddUpdateComponent implements OnInit {
   }
 
   // Variables
-  ItemId: number | undefined;
+  ItemId: number = 0;
   Title: string = "";
   Description: string = "";
   Url: string = "";
   ParentCollectionId: number | null = null;
+  isUpdate: boolean = false;
+
+  // Preview variables
+  urlImage = '';
+  urlDescription = '';
+  urlDomain = '';
 
   async onFormSubmit() {
     // Validating Data
     // PENDING 
 
     // Adding Item
-    let res = await this.itemOperationService.addNestItem({
+    let res = await this.itemOperation.addNestItem({
       Title: this.Title,
       Description: this.Description,
       Url: this.Url,
@@ -45,7 +51,7 @@ export class AddUpdateComponent implements OnInit {
     });
 
     if (res.msg)
-      this.commonFunctionsService.showSnackBar(res.msg)
+      this.commonFunctions.showSnackBar(res.msg)
 
     if (res.success) {
       let path = 'dashboard' + (this.ParentCollectionId ? `/${this.ParentCollectionId}` : '');
@@ -54,8 +60,27 @@ export class AddUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.ItemId = params['id'];
+    // router data
+    this.route.data.subscribe(async params => {
+      this.isUpdate = params['isUpdate'] || false;
+
+      if (this.isUpdate) {
+        this.ItemId = this.ParentCollectionId ?? 0;
+        this.ParentCollectionId = null;
+
+        // Fetch details
+        let resData = await this.itemOperation.getDetails(this.ItemId);
+        if (resData.success) {
+          this.Title = resData.result.Title;
+          this.Description = resData.result.Description;
+          this.Url = resData.result.Url;
+
+          // Preivew
+          this.urlDomain = resData.result.UrlDomain;
+          this.urlImage = resData.result.UrlImage;
+          this.urlDescription = resData.result.UrlDescription;
+        }
+      }
     });
 
     // Fetching details from shared

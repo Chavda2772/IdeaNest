@@ -1,17 +1,13 @@
-<!-- <div
-  class="border border-gray-300 p-4 m-4 w-80 bg-white rounded-lg hover:shadow-2xl"
->
-  <h2 class="text-xl font-semibold mb-2 text-center line-clamp-1">{{ title }}</h2>
-  <img class="w-full h-auto mb-2" [src]="imageUrl" [alt]="imageUrl" />
-  <p class="text-gray-700 mb-2">{{ description }}</p>
-  <p>
-    <a class="text-blue-600 hover:underline" [href]="url">{{ url }}</a>
-  </p>
-</div> -->
-
 <div class="break-inside-avoid cursor-pointer w-full mb-6">
   <div class="flex flex-col max-w-[230px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-md">
-    <span class="text-lg font-semibold text-gray-900 line-clamp-1 mb-2">{{ title }}</span>
+    <div class="flex flex-row w-full align-middle justify-between">
+      <span class="text-lg font-semibold text-gray-900 line-clamp-1 mb-2">{{ title }}</span>
+      @if (allowAction) {
+      <button class="px-2 mb-2" [matMenuTriggerFor]="menu">
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </button>
+      }
+    </div>
     <a masonryLazy loading="lazy" [href]="url" target="_blank"
       class="bg-gray-300 rounded-md pb-3 mb-3 hover:bg-gray-400">
       @if (urlImage) {
@@ -31,4 +27,10 @@
       {{description}}
     </p>
   </div>
+
+  <!-- Menu -->
+  <mat-menu class="p-0" #menu="matMenu">
+    <button mat-menu-item (click)="onEditItem()">Edit</button>
+    <button mat-menu-item (click)="onDeleteItem()">Delete</button>
+  </mat-menu>
 </div>

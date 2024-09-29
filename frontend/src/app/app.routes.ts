@@ -54,6 +54,7 @@ export const routes: Routes = [
         component: AddUpdateComponent,
         canActivate: [authGuard],
         title: 'Update Item',
+        data: { isUpdate: true }
     },
     {
         path: '**',

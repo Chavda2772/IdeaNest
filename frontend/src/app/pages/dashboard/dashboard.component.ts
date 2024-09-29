@@ -81,7 +81,6 @@ export class DashboardComponent implements OnInit {
     this.CollectionName = collectionDetails.CollectionName ?? "Home";
   }
 
-
   // Events
   onFooterAddClick() {
     this.dialogRef.open(AddSelectionWindowComponent, {
@@ -99,5 +98,9 @@ export class DashboardComponent implements OnInit {
   onIconClick() {
     let path = 'add' + (this.CollectionId ? `/${this.CollectionId}` : '');
     this.router.navigate([path]);
+  }
+
+  async onDeleteItem() {
+    await this.refreshCollectionAndItems();
   }
 }
