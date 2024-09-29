@@ -1,4 +1,4 @@
-const _baseApi = 'http://localhost:3000';
+const _baseApi = '';
 
 // APIS
 export const ApiEndpoints = {
