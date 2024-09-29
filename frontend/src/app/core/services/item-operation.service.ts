@@ -26,4 +26,9 @@ export class ItemOperationService {
     let responseData = await this.proxyBaseService.request<ItemResponseData>('get', `${ApiEndpoints.NestItems.Add}/${id}`);
     return responseData as ItemResponseData;
   }
+
+  async updateNestItem(body?: object) {
+    let responseData = await this.proxyBaseService.request<Responsedata>('put', ApiEndpoints.NestItems.Add, body);
+    return responseData as Responsedata;
+  }
 }

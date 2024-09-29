@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ItemOperationService } from '../../core/services/item-operation.service';
 import { CommonFunctionsService } from '../../core/utility/common-functions.service';
 import { NestItemComponent } from '../dashboard/nest-item/nest-item.component';
+import { Responsedata } from '../../core/models/responsedata.model';
 
 @Component({
   selector: 'app-add-update',
@@ -41,19 +42,31 @@ export class AddUpdateComponent implements OnInit {
   async onFormSubmit() {
     // Validating Data
     // PENDING 
-
+    
+    let resData: Responsedata;
+    // Update Item
+    if (this.isUpdate) {
+      resData = await this.itemOperation.updateNestItem({
+        Id: this.ItemId,
+        Title: this.Title,
+        Description: this.Description,
+        Url: this.Url
+      });
+    }
     // Adding Item
-    let res = await this.itemOperation.addNestItem({
-      Title: this.Title,
-      Description: this.Description,
-      Url: this.Url,
-      ParentCollectionId: this.ParentCollectionId
-    });
+    else {
+      resData = await this.itemOperation.addNestItem({
+        Title: this.Title,
+        Description: this.Description,
+        Url: this.Url,
+        ParentCollectionId: this.ParentCollectionId
+      });
+    }
 
-    if (res.msg)
-      this.commonFunctions.showSnackBar(res.msg)
+    if (resData.msg)
+      this.commonFunctions.showSnackBar(resData.msg)
 
-    if (res.success) {
+    if (resData.success) {
       let path = 'dashboard' + (this.ParentCollectionId ? `/${this.ParentCollectionId}` : '');
       this.router.navigate([path])
     }
