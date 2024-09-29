@@ -4,6 +4,7 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CollectionOperationService } from '../../../core/services/collection-operation.service';
+import { CommonFunctionsService } from '../../../core/utility/common-functions.service';
 
 @Component({
   selector: 'app-add-update-folder',
@@ -16,6 +17,7 @@ export class AddUpdateFolderComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
   dialogRef = inject(MatDialogRef<AddUpdateFolderComponent>);
   collectionService = inject(CollectionOperationService);
+  commonFunctionsService = inject(CommonFunctionsService);
 
   // Data
   Title: string = "Add Collection";
@@ -34,8 +36,8 @@ export class AddUpdateFolderComponent implements OnInit {
   // Methods
   async onSave() {
     let data = await this.collectionService.addCollection(this.CollectionName, this.CollectionParentId);
-    if(data.success){
-      alert("Collection Added successfully.")
+    if (data.success) {
+      this.commonFunctionsService.showSnackBar("Collection Added successfully.")
       this.onClose()
     }
   }

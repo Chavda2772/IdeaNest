@@ -24,7 +24,6 @@ export class AddSelectionWindowComponent {
 
   // Events
   onCollectionClick() {
-    this.metDialogSelection.close();
     this.metDialogAdd.open(AddUpdateFolderComponent, {
       width: '500px',
       data: {
@@ -32,6 +31,8 @@ export class AddSelectionWindowComponent {
         CollectionName: this.data.CollectionName,
         CollectionParentId: this.data.CollectionParentId,
       },
+    }).beforeClosed().subscribe(()=>{
+      this.metDialogSelection.close();
     });
   }
   onNestItemClick() {

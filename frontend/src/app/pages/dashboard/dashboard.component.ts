@@ -90,8 +90,8 @@ export class DashboardComponent implements OnInit {
         CollectionName: '',
         CollectionParentId: this.CollectionId
       },
-    }).afterClosed().subscribe(() => {
-      // TODO: Refresh on adding item or Collection
+    }).afterClosed().subscribe(async () => {
+      await this.refreshCollectionAndItems();
     });
   }
 
