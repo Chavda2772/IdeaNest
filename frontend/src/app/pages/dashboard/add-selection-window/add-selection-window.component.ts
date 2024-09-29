@@ -31,8 +31,9 @@ export class AddSelectionWindowComponent {
         CollectionName: this.data.CollectionName,
         CollectionParentId: this.data.CollectionParentId,
       },
-    }).beforeClosed().subscribe(()=>{
-      this.metDialogSelection.close();
+    }).beforeClosed().subscribe((success) => {
+      if (success)
+        this.metDialogSelection.close();
     });
   }
   onNestItemClick() {

@@ -29,4 +29,14 @@ export class CollectionOperationService {
 
     return resData as Responsedata;
   }
+
+  // Adding collection
+  async updateCollection(id: number, name: string) {
+    let resData = await this.proxyBase.request<Responsedata>('put', ApiEndpoints.Collection.Add, {
+      CollectionId: id,
+      CollectionName: name
+    })
+
+    return resData as Responsedata;
+  }
 }

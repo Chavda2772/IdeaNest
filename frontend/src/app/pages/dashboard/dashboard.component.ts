@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
   // Events
   onFooterAddClick() {
     this.dialogRef.open(AddSelectionWindowComponent, {
-      width: '500px',
+      width: '390px',
       data: {
         CollectionId: 0,
         CollectionName: '',
