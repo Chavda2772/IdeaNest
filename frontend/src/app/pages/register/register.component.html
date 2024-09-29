@@ -1,97 +1,94 @@
-<section class="bg-gray-50">
-    <div class="flex flex-col items-center pt-10 pb-10">
-        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight">
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="images/login.png" alt="IMG">
+            </div>
+
+            <form class="login100-form validate-form" [formGroup]="_registerForm" (ngSubmit)="onSubmit()">
+                <span class="login100-form-title">
                     Register
-                </h1>
-                <form [formGroup]="_registerForm" (submit)="onSubmit()" class="space-y-4 md:space-y-6">
-                    <div>
-                        <label for="FirstName" class="block mb-2 text-sm font-medium text-gray-900">
-                            First Name:
-                        </label>
-                        <input type="text" name="FirstName" id="FirstName" formControlName="firstName"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                            placeholder="">
-                    </div>
-                    <div>
-                        <label for="middleName" class="block mb-2 text-sm font-medium text-gray-900  ">
-                            Middle Name:
-                        </label>
-                        <input type="text" name="middleName" id="middleName" formControlName="middleName"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                            placeholder="">
-                    </div>
-                    <div>
-                        <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900  ">
-                            Last Name:
-                        </label>
-                        <input type="text" name="lastName" id="lastName" formControlName="lastName"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5            "
-                            placeholder="">
-                    </div>
-                    <div>
-                        <label for="userName" class="block mb-2 text-sm font-medium text-gray-900  ">
-                            User Name:
-                        </label>
-                        <input type="text" name="userName" id="userName" formControlName="userName"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5            "
-                            placeholder="user123">
-                    </div>
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900  ">
-                            Your Email:
-                        </label>
-                        <input type="email" name="email" id="email" formControlName="email"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5            "
-                            placeholder="name@company.com">
-                    </div>
-                    <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900  ">
-                            Password:
-                        </label>
-                        <input type="password" name="password" id="password" placeholder="••••••••"
-                            formControlName="password"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5            ">
-                    </div>
-                    <div>
-                        <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900  ">
-                            Confirm password:
-                        </label>
-                        <input type="confirm-password" name="confirm-password" id="confirm-password"
-                            formControlName="confirmPassword" placeholder="••••••••"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5            ">
-                    </div>
-                    <div>
-                        <label for="contactNo" class="block mb-2 text-sm font-medium text-gray-900  ">
-                            Contact No:
-                        </label>
-                        <input type="number" formControlName="ContactNo" maxlength="12" name="contactNo" id="contactNo"
-                            formControlName="contactNo"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5            "
-                            placeholder="">
-                    </div>
-                    <div>
-                        <label for="ProfileUrl" class="block mb-2 text-sm font-medium text-gray-900  ">
-                            Your ProfileUrl:
-                        </label>
-                        <input type="text" formControlName="profileUrl" name="ProfileUrl" id="ProfileUrl"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5            "
-                            placeholder="">
-                    </div>
-                    <button type="submit"
-                        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Create an account
-                    </button>
-                </form>
-                <div class="mt-10 text-center text-sm text-gray-500">
-                    Already have an account?
-                    <button (click)="onNavigateToLogin()"
-                        class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                        Login here
+                </span>
+
+                <!-- FirstName -->
+                <div class="wrap-input100 validate-input"
+                    [class.alert-validate]="_registerForm.controls['firstName'].invalid && validated"
+                    data-validate="FirstName is required">
+                    <input class="input100" type="text" name="firstName" placeholder="First Name"
+                        formControlName="firstName" required>
+                    <label>First Name</label>
+                </div>
+
+                <!-- Middle Name -->
+                <div class="wrap-input100">
+                    <input class="input100" type="text" name="middleName" placeholder="Middle Name"
+                        formControlName="middleName" required>
+                    <label>Middle Name</label>
+                </div>
+
+                <!-- Last Name -->
+                <div class="wrap-input100 validate-input"
+                    [class.alert-validate]="_registerForm.controls['lastName'].invalid && validated"
+                    data-validate="LastName is required">
+                    <input class="input100" type="text" name="lastName" placeholder="Last Name"
+                        formControlName="lastName" required>
+                    <label>Last Name</label>
+                </div>
+
+                <!-- User Name -->
+                <div class="wrap-input100 validate-input"
+                    [class.alert-validate]="_registerForm.controls['userName'].invalid && validated"
+                    data-validate="UserName is required">
+                    <input class="input100" type="text" name="userName" placeholder="UserName"
+                        formControlName="userName" required>
+                    <label>UserName</label>
+                </div>
+
+                <!-- Email -->
+                <div class="wrap-input100 validate-input"
+                    [class.alert-validate]="_registerForm.controls['email'].invalid && validated"
+                    data-validate="Valid email is required: example@abc.xyz">
+                    <input class="input100" type="text" name="email" placeholder="Email" formControlName="email"
+                        required>
+                    <label>Eamil</label>
+                </div>
+
+                <!-- Password -->
+                <div class="wrap-input100 validate-input"
+                    [class.alert-validate]="_registerForm.controls['password'].invalid && validated"
+                    data-validate="Password is required">
+                    <input class="input100" type="password" name="password" placeholder="Password"
+                        formControlName="password" required>
+                    <label>Password</label>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="wrap-input100 validate-input"
+                    [class.alert-validate]="_registerForm.controls['confirmPassword'].invalid && validated"
+                    data-validate="Confirm Password is required">
+                    <input class="input100" type="password" name="confirmPassword" placeholder="Confirm Password"
+                        formControlName="confirmPassword" required>
+                    <label>Confirm Password</label>
+                </div>
+
+                <!-- TODO: Profile PENDING -->
+                <!-- <div class="wrap-input100">
+                    <input class="input100" type="text" name="profile" placeholder="profile" formControlName="profile"
+                        required>
+                    <label>Profile:</label>
+                </div> -->
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Register
                     </button>
                 </div>
-            </div>
+
+                <div class="text-center m-t-50 cursor-pointer" (click)="onNavigateToLogin()">
+                    Sign In
+                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                </div>
+            </form>
         </div>
     </div>
-</section>
+</div>

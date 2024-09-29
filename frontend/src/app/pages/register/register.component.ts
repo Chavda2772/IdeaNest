@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   FormBuilder,
@@ -9,21 +9,20 @@ import {
 } from '@angular/forms';
 import { UserService } from '../../core/services/user.service';
 import { UserDetails } from '../../core/models/userDetails.model';
+import { CommonFunctionsService } from '../../core/utility/common-functions.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './register.component.html'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   _registerForm: FormGroup;
+  validated: boolean = false;
 
-  constructor(
-    private router: Router,
-    private formBuilder: FormBuilder,
-    private userService: UserService
-  ) {
+  constructor(private formBuilder: FormBuilder) {
     // Registeration form
     this._registerForm = this.formBuilder.group({
       firstName: new FormControl('', [Validators.required]),
@@ -32,27 +31,34 @@ export class RegisterComponent {
       userName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
+        Validators.required
       ]),
       confirmPassword: new FormControl('', [Validators.required]),
-      contactNo: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(12),
-      ]),
+      contactNo: new FormControl(''), // Remove contact no
       theme: new FormControl('default-theme'),
       profileUrl: new FormControl(''),
     });
   }
 
+  // Injectables
+  router = inject(Router);
+  userService = inject(UserService);
+  commonFunctionsService = inject(CommonFunctionsService);
+
   // Methods
   async onSubmit() {
-    // Detail
+    // Details validation
     if (this._registerForm.invalid) {
-      // Fetch every control and find invalid controls
-      // TODO : PENDING
-      let invalidControls = this._registerForm.controls;
-      console.warn('Invalid Details');
+      this.validated = true;
+      this.commonFunctionsService.showSnackBar('Invalid details');
+      return;
+    }
+
+    // Pasword match validation
+    let listOfControls = this._registerForm.controls;
+    if (listOfControls['password'].value != listOfControls['confirmPassword'].value) {
+      this.commonFunctionsService.showSnackBar('Confirm password does not match the password. try again.');
+      return;
     }
 
     // Prepare details
@@ -69,14 +75,14 @@ export class RegisterComponent {
       ProfileUrl: formValues.profileUrl
     };
 
-    // Proxy to save data
+    // Proxy to save user details
     let resData: any = await this.userService.RegisterUser(UserDetails);
     if (resData.success) {
       this.router.navigate(['login']);
+      this.commonFunctionsService.showSnackBar('User Registered successfully. Try to login.')
     }
-    else {
+    else
       console.error(resData.msg);
-    }
   }
 
   onNavigateToLogin() {
