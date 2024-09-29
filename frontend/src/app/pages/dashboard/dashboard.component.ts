@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
   CollectionDetail: CollectionResponse | undefined;
   masonryOptions: NgxMasonryOptions = {
     gutter: 20,
+    percentPosition: true,
     horizontalOrder: true,
     resize: true,
     animations: {
