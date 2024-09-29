@@ -17,7 +17,7 @@ import {
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
   // Dependency Injection with constructor
@@ -39,15 +39,12 @@ export class LoginComponent implements OnInit {
 
   // Form variables
   _loginForm: FormGroup;
-  Email: string = '';
-  Password: string = '';
 
   // Methods
   async onFormSubmit() {
     // validate details
     if (this._loginForm.invalid) {
       // Email Vaidation
-      debugger
       if (this._loginForm.controls['email'].value.trim() == '') {
         this.commonFunctionsService.showSnackBar('Email cannot be blank.');
         return
@@ -67,7 +64,10 @@ export class LoginComponent implements OnInit {
 
     // Submit request
     let formValues = this._loginForm.value;
-    let resData = await this.userService.LoginUser({ Email: formValues.email, Password: formValues.password });
+    let resData = await this.userService.LoginUser({
+      Email: formValues.email,
+      Password: formValues.password
+    });
 
     if (resData.success) {
       localStorage.setItem(LocalStorageConst.TokenKey, resData.token ?? '');
@@ -82,10 +82,6 @@ export class LoginComponent implements OnInit {
   }
 
   navigateToRegister() {
-    this.navigateTo('register');
-  }
-
-  navigateTo(name: string) {
-    this.router.navigate([name]);
+    this.router.navigate(['register']);
   }
 }
