@@ -1,13 +1,13 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { CommonFunctionsService } from '../../utility/common-functions.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-footer-navigation',
   standalone: true,
-  imports: [],
+  imports: [MatButtonModule, MatTooltipModule],
   templateUrl: './footer-navigation.component.html'
 })
 export class FooterNavigationComponent {

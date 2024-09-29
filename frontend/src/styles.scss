@@ -18,6 +18,9 @@ body {
     margin: 0;
     box-sizing: border-box;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: linear-gradient(-135deg, #ffcafc, #5e78ff);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
     @include mat.all-component-themes($theme);
 }
