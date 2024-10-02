@@ -10,7 +10,7 @@
           Login
         </span>
 
-        <div class="wrap-input100 validate-input"
+        <div class="wrap-input100 validate-input mb-3"
           [class.alert-validate]="_loginForm.controls['email'].invalid && validated"
           data-validate="Valid email is required: example@abc.xyz">
           <input class="input100" type="text" name="email" placeholder="Email" formControlName="email">
@@ -20,7 +20,7 @@
           </span>
         </div>
 
-        <div class="wrap-input100 validate-input"
+        <div class="wrap-input100 validate-input mb-3"
           [class.alert-validate]="_loginForm.controls['password'].invalid && validated"
           data-validate="Password is required">
           <input class="input100" type="password" name="pass" placeholder="Password" formControlName="password">
@@ -46,9 +46,9 @@
           </a>
         </div> -->
 
-        <div class="text-center m-t-50 cursor-pointer" (click)="navigateToRegister()">
+        <div class="text-center mt-12 cursor-pointer" (click)="navigateToRegister()">
           Create your Account
-          <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-right ml-1" aria-hidden="true"></i>
         </div>
       </form>
     </div>
