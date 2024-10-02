@@ -13,10 +13,10 @@ module.exports.getItemDetails = async function (req, res, next) {
 
     // validate nest item ID
     if (!itemId)
-        return res.send({
-          success: false,
-          msg: "Invalid details"
-        })
+      return res.send({
+        success: false,
+        msg: "Invalid details"
+      })
 
     let result = await itemService.getNestItemDetailsById(itemId);
     res.send({
@@ -57,7 +57,7 @@ module.exports.insertItem = async function (req, res, next) {
       if (urlDetail) {
         isPreview = true;
         urlTitle = urlDetail.title;
-        urlImage = urlDetail.img;
+        urlImage = urlDetail.image;
         urlDescription = urlDetail.description;
         urlDomain = urlDetail.domain;
       }
@@ -120,7 +120,7 @@ module.exports.updateItem = async function (req, res, next) {
       if (urlDetail) {
         isPreview = true;
         urlTitle = urlDetail.title;
-        urlImage = urlDetail.img;
+        urlImage = urlDetail.image;
         urlDescription = urlDetail.description;
         urlDomain = urlDetail.domain;
       }

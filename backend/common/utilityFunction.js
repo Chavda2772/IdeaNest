@@ -1,9 +1,9 @@
-const linkPreviewGenerator = require('../third_party/link-preview-generator');
+const linkPreview = require('link-preview-extractor');
 const createError = require('http-errors')
 
 // Fetch URL Details
-module.exports.fetchUrlDetails = async (url) => {
-    return new Promise(async function (resolve, reject) {
+module.exports.fetchUrlDetails = (url) => {
+    return new Promise(function (resolve, reject) {
         // validate
         if (!url)
             return reject(createError('URL cannot blank'));
@@ -16,11 +16,11 @@ module.exports.fetchUrlDetails = async (url) => {
         }
 
         // Fetch Details By Link Preview
-        try {
-            let data = await linkPreviewGenerator(url)
-            resolve(data);
-        } catch (error) {
-            reject({ error: 'Failed to fetch preview data' });
-        }
+        linkPreview(url)
+            .then(data => {
+                resolve(data)
+            }).catch(err => {
+                reject(err)
+            })
     });
 };
