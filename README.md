@@ -15,7 +15,7 @@ Before getting started, ensure you have the following installed:
 - [Node.js](https://nodejs.org/) (version 14 or higher)
 - [npm](https://www.npmjs.com/) (Node package manager)
 
-### Installation
+### To run the application locally:
 
 1. Clone the repository:
     ```bash
@@ -27,28 +27,41 @@ Before getting started, ensure you have the following installed:
     cd ideanest
     ```
 
-3. Install the necessary dependencies:
+3. Database setup:
+    - Create MySql Database
+    - Execute SQL Script into Database from below location
     ```bash
+    resources/Database/database_create_script.sql
+    ```
+    - Rename backend/.env_Sample to .env
+    - Update necessary details in .env file and remove comments.
+
+4. Install the necessary frontend dependencies:
+    ```bash
+    cd frontend
     npm install
     ```
 
-### Running the Application
-
-To run the application locally:
-```bash
-npm start
-```
+5. Install the necessary backend dependencies:
+    ```bash
+    cd .. 
+    cd backend
+    npm install
+    ```
 
 This will start the development server. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+### DEMO
+[Demo](https://ideanest.chavdamahesh.com/)
 
 ### Building for Production
 
 To create a production-ready build:
 ```bash
-npm run build
+build.bat
 ```
 
-The optimized production build will be available in the `build` directory, ready for deployment.
+The optimized production build will be available in the `build` directory at repository level, ready for production.
 
 ## Usage
 

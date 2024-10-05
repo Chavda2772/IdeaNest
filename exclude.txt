@@ -1,0 +1,8 @@
+\.vscode\
+\.vs\
+\.git\
+\.github\
+\Logs\
+\node_modules\
+.env
+.env_Sample
